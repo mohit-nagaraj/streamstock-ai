@@ -1,0 +1,1247 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Initialize Next.js Project with shadcn/ui and Tailwind CSS",
+        "description": "Set up the frontend project using Next.js 14 (App Router), integrate shadcn/ui components, and configure Tailwind CSS for styling.",
+        "details": "Run `npx create-next-app`, install shadcn/ui and Tailwind CSS, configure App Router, and set up initial folder structure for pages and components.",
+        "testStrategy": "Verify project builds and runs locally; check that shadcn/ui and Tailwind CSS styles render correctly on a sample page.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Next.js 14 Project with App Router",
+            "description": "Initialize a new Next.js 14 project using the App Router and set up the base folder structure.",
+            "dependencies": [],
+            "details": "Run `npx create-next-app@latest` with TypeScript enabled. Ensure the `app` directory is present for App Router. Set up initial folders for pages and components as per project needs.",
+            "status": "done",
+            "testStrategy": "Run `npm run dev` to verify the project builds and the default page renders. Confirm the `app` directory structure exists."
+          },
+          {
+            "id": 2,
+            "title": "Install and Configure Tailwind CSS",
+            "description": "Add Tailwind CSS to the Next.js project and configure it for styling.",
+            "dependencies": [
+              1
+            ],
+            "details": "Install Tailwind CSS and its peer dependencies. Initialize Tailwind config files. Update `tailwind.config.js` and add Tailwind directives to the global CSS file. Verify Tailwind classes work on a sample component.",
+            "status": "done",
+            "testStrategy": "Add a test component using Tailwind classes. Check that styles are applied correctly in the browser."
+          },
+          {
+            "id": 3,
+            "title": "Integrate shadcn/ui Component Library",
+            "description": "Install shadcn/ui and set up at least one sample component to verify integration.",
+            "dependencies": [
+              2
+            ],
+            "details": "Install shadcn/ui via npm. Follow shadcn/ui setup instructions for Next.js 14. Import and render a sample shadcn/ui component (e.g., Button) on the home page.",
+            "status": "done",
+            "testStrategy": "Render a shadcn/ui component and confirm it displays and styles correctly alongside Tailwind CSS."
+          },
+          {
+            "id": 4,
+            "title": "Test Initial Setup and Commit Changes",
+            "description": "Test the combined setup of Next.js, Tailwind CSS, and shadcn/ui, then commit the working baseline to git.",
+            "dependencies": [
+              3
+            ],
+            "details": "Verify that the app runs, Tailwind styles apply, and shadcn/ui components render. Check for errors or warnings. Stage all files, commit with a descriptive message (e.g., 'Initial project setup with Next.js 14, Tailwind CSS, shadcn/ui'), and push to the remote repository.",
+            "status": "in-progress",
+            "testStrategy": "Manual end-to-end check in browser. Confirm git commit and push succeed; verify repository reflects changes."
+          },
+          {
+            "id": 5,
+            "title": "Set Up Initial Folder Structure for MVP Features",
+            "description": "Organize folders for pages, components, and future MVP features (dashboard, events, forecasting, alerts).",
+            "dependencies": [
+              4
+            ],
+            "details": "Create folders such as `/app/dashboard`, `/components`, `/app/events`, and `/app/alerts` to prepare for MVP development. Add placeholder files or README.md in each to document intended use.",
+            "status": "pending",
+            "testStrategy": "Check that all folders exist and are tracked in git. Confirm the app still builds and runs after structure changes."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Create Docker Compose Setup for Kafka and Zookeeper",
+        "description": "Provision Kafka and Zookeeper using Docker Compose for local event streaming infrastructure.",
+        "details": "Write `docker-compose.yml` with Kafka and Zookeeper services, expose necessary ports, and ensure containers start/stop correctly.",
+        "testStrategy": "Run `docker-compose up` and verify Kafka and Zookeeper are accessible; check logs for successful startup.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Draft docker-compose.yml with Kafka and Zookeeper Services",
+            "description": "Create an initial docker-compose.yml file defining both Kafka and Zookeeper services with required images and environment variables.",
+            "dependencies": [],
+            "details": "Write a docker-compose.yml file specifying services for Zookeeper (using the official image, exposing port 2181) and Kafka (using the official image, exposing port 9092). Set necessary environment variables such as KAFKA_ZOOKEEPER_CONNECT, KAFKA_ADVERTISED_LISTENERS, and ensure service names match connection strings. Use restart policies and map ports for local access.",
+            "status": "pending",
+            "testStrategy": "Check that the YAML is valid and all required fields are present for both services."
+          },
+          {
+            "id": 2,
+            "title": "Configure Networking, Volumes, and Environment for Local Development",
+            "description": "Set up Docker networking, persistent volumes for Kafka data, and environment variables for local development and testing.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add a custom Docker network if needed, configure named volumes for Kafka data persistence, and ensure environment variables (e.g., KAFKA_BROKER_ID, KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR) are set for a single-node local setup. Document any host IP requirements for KAFKA_ADVERTISED_LISTENERS.",
+            "status": "pending",
+            "testStrategy": "Inspect docker-compose.yml for correct network and volume configuration; verify environment variables are set for local use."
+          },
+          {
+            "id": 3,
+            "title": "Test Docker Compose Setup for Kafka and Zookeeper",
+            "description": "Run docker-compose up and verify that both Kafka and Zookeeper containers start successfully and are accessible.",
+            "dependencies": [
+              2
+            ],
+            "details": "Execute 'docker-compose up' and monitor logs for successful startup messages from both services. Use docker ps to confirm containers are running. Optionally, use a Kafka client or CLI to connect to the broker and Zookeeper to verify connectivity.",
+            "status": "pending",
+            "testStrategy": "Check logs for 'started' messages, ensure ports 2181 and 9092 are open, and use a Kafka CLI tool to list topics or connect to the broker."
+          },
+          {
+            "id": 4,
+            "title": "Commit Docker Compose Setup with Descriptive Message",
+            "description": "Commit the working docker-compose.yml and related configuration files to the git repository with a clear, descriptive commit message.",
+            "dependencies": [
+              3
+            ],
+            "details": "Stage docker-compose.yml and any supporting files (e.g., .env, README.md), then commit with a message such as 'Add Docker Compose setup for Kafka and Zookeeper with local development configuration.'",
+            "status": "pending",
+            "testStrategy": "Verify that the commit includes all relevant files and the message accurately describes the changes."
+          },
+          {
+            "id": 5,
+            "title": "Push Docker Compose Setup to Remote Git Repository",
+            "description": "Push the committed Docker Compose setup to the project's remote git repository to ensure team access and version control.",
+            "dependencies": [
+              4
+            ],
+            "details": "Use 'git push' to upload the committed changes to the remote repository. Confirm that the files appear in the remote repo and are accessible to collaborators.",
+            "status": "pending",
+            "testStrategy": "Check the remote repository for the new commit and verify that docker-compose.yml and related files are present."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Implement Makefile for Project Orchestration",
+        "description": "Create a Makefile with commands to start/stop services, clean Docker volumes, and show logs.",
+        "details": "Write Makefile targets: `dev`, `docker-up`, `docker-down`, `clean`, `logs` as specified in PRD.",
+        "testStrategy": "Run each Makefile command and verify expected behavior (e.g., containers start, logs display, volumes clean).",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Draft Makefile with Core Orchestration Targets",
+            "description": "Create an initial Makefile with targets for dev, docker-up, docker-down, clean, and logs as specified in the PRD.",
+            "dependencies": [],
+            "details": "Write Makefile targets: 'dev' (development environment), 'docker-up' (start all services), 'docker-down' (stop all services), 'clean' (remove Docker volumes/containers), and 'logs' (show service logs). Use clear comments for each target and ensure commands are compatible with the project's Docker/Kafka stack.",
+            "status": "pending",
+            "testStrategy": "Run 'make <target>' for each target and verify the correct shell/Docker commands execute as expected."
+          },
+          {
+            "id": 2,
+            "title": "Test All Makefile Targets for Correct Execution",
+            "description": "Manually execute each Makefile target and verify that services start, stop, clean, and logs display as intended.",
+            "dependencies": [
+              1
+            ],
+            "details": "For each target, run the corresponding 'make' command. Confirm that 'dev' starts the development stack, 'docker-up' brings up all containers, 'docker-down' stops them, 'clean' removes volumes/containers, and 'logs' outputs service logs. Document any issues or unexpected behaviors.",
+            "status": "pending",
+            "testStrategy": "Observe Docker container status, check logs output, and verify cleanup by inspecting Docker volumes and containers after each command."
+          },
+          {
+            "id": 3,
+            "title": "Refine Makefile for Usability and Self-Documentation",
+            "description": "Improve Makefile by adding help target and comments for self-documentation and usability.",
+            "dependencies": [
+              2
+            ],
+            "details": "Add a 'help' target that lists all available commands and their descriptions using comments (##) and a grep/sed script. Ensure each target is clearly documented for team use. Set the default goal to 'help' for user-friendliness.",
+            "status": "pending",
+            "testStrategy": "Run 'make' and 'make help' to verify that all targets and their descriptions are listed correctly."
+          },
+          {
+            "id": 4,
+            "title": "Commit Makefile and Documentation to Version Control",
+            "description": "Commit the finalized Makefile and any related documentation with a descriptive commit message.",
+            "dependencies": [
+              3
+            ],
+            "details": "Stage the Makefile and any updated documentation. Write a commit message such as 'Add Makefile for project orchestration with dev, docker-up, docker-down, clean, logs, and help targets.'",
+            "status": "pending",
+            "testStrategy": "Check git log to confirm the commit is present and includes all intended files."
+          },
+          {
+            "id": 5,
+            "title": "Push Makefile Changes to Remote Repository",
+            "description": "Push the committed Makefile and documentation changes to the project's remote git repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Use 'git push' to upload the latest commit to the remote repository. Ensure the branch is up to date and that the Makefile is accessible to the team.",
+            "status": "pending",
+            "testStrategy": "Verify on the remote repository (e.g., GitHub/GitLab) that the Makefile and documentation are present and up to date."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Design In-Memory Data Models for Products, Events, and Alerts",
+        "description": "Implement in-memory data structures for Product, Event, and Alert entities as per PRD schema.",
+        "details": "Define TypeScript interfaces and initialize in-memory stores; optionally set up SQLite persistence if time allows.",
+        "testStrategy": "Unit test CRUD operations on in-memory stores; validate schema adherence and data integrity.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define TypeScript Interfaces for Product, Event, and Alert Entities",
+            "description": "Create TypeScript interfaces that represent the Product, Event, and Alert entities according to the PRD schema.",
+            "dependencies": [],
+            "details": "Analyze the PRD schema and translate each entity (Product, Event, Alert) into a strongly-typed TypeScript interface, ensuring all required fields and types are covered for MVP functionality.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to validate that the interfaces enforce correct typing and required fields."
+          },
+          {
+            "id": 2,
+            "title": "Implement In-Memory Stores for Products, Events, and Alerts",
+            "description": "Initialize in-memory data structures to store Product, Event, and Alert objects for real-time operations.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use JavaScript Maps or arrays to hold instances of each entity type, supporting efficient CRUD operations and real-time updates as required by the event-driven architecture.",
+            "status": "pending",
+            "testStrategy": "Test CRUD operations on each in-memory store; verify data integrity and correct linkage between entities."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Real-Time Event Handling Logic for Inventory Updates and Alerts",
+            "description": "Implement logic to process inventory events and trigger alerts in response to stock changes, simulating event-driven flows.",
+            "dependencies": [
+              2
+            ],
+            "details": "Set up functions to handle simulated Kafka events (e.g., stock updates, sales, restocks) that update in-memory stores and trigger alert creation or resolution as per business rules.",
+            "status": "pending",
+            "testStrategy": "Simulate event flows and verify that inventory updates and alerts are processed and reflected in the in-memory stores as expected."
+          },
+          {
+            "id": 4,
+            "title": "Test In-Memory Data Models and Event-Driven Logic",
+            "description": "Thoroughly test the in-memory data models and event-driven logic to ensure correctness and reliability.",
+            "dependencies": [
+              3
+            ],
+            "details": "Write and execute unit and integration tests covering CRUD operations, event processing, alert triggering, and edge cases (e.g., overselling, stockouts).",
+            "status": "pending",
+            "testStrategy": "Automated test suite with coverage reports; manual verification of key event-driven scenarios."
+          },
+          {
+            "id": 5,
+            "title": "Commit and Push Changes with Descriptive Messages",
+            "description": "Commit all implemented code and tests to the git repository with clear, descriptive commit messages, then push to remote.",
+            "dependencies": [
+              4
+            ],
+            "details": "Stage all changes, write a commit message summarizing the implemented data models and event-driven logic, and push to the main branch to ensure code is versioned and available for team review.",
+            "status": "pending",
+            "testStrategy": "Verify that all changes are present in the remote repository and that commit history accurately reflects the work completed."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Seed Initial Demo Data for Products and Historical Events",
+        "description": "Generate 10-15 products, 3 warehouses, and 30 days of historical events for realistic forecasting.",
+        "details": "Write a data seeder that populates products, warehouses, and historical sales/restock/return events on startup.",
+        "testStrategy": "Check seeded data in memory; validate product and event counts and correct warehouse assignments.",
+        "priority": "high",
+        "dependencies": [
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Seeder Logic for Products, Warehouses, and Events",
+            "description": "Plan and structure the data seeder to generate demo products, warehouses, and historical events for the inventory system.",
+            "dependencies": [],
+            "details": "Define the schema for products (10-15 items), warehouses (3 locations), and event types (sales, restock, return). Specify realistic attributes and relationships to support forecasting and event-driven flows.",
+            "status": "pending",
+            "testStrategy": "Review schema definitions and ensure all required fields are present for each entity."
+          },
+          {
+            "id": 2,
+            "title": "Implement Data Seeder to Populate Demo Entities on Startup",
+            "description": "Develop the actual seeder code to create products, warehouses, and 30 days of historical events when the system starts.",
+            "dependencies": [
+              1
+            ],
+            "details": "Write functions to generate random but plausible product data, assign products to warehouses, and simulate daily sales, restocks, and returns. Ensure events are timestamped and linked to products and warehouses.",
+            "status": "pending",
+            "testStrategy": "Run the seeder and inspect in-memory data stores for correct entity counts and relationships."
+          },
+          {
+            "id": 3,
+            "title": "Test Seeded Data Integrity and Event Distribution",
+            "description": "Thoroughly test the seeded data for accuracy, completeness, and realistic event patterns across all warehouses.",
+            "dependencies": [
+              2
+            ],
+            "details": "Validate that all products and warehouses are created, each product is assigned to at least one warehouse, and events cover the full 30-day range with appropriate types and quantities. Check for edge cases like overselling or missing restocks.",
+            "status": "pending",
+            "testStrategy": "Write automated tests to verify entity counts, event types, date ranges, and warehouse assignments. Manually inspect sample data for realism."
+          },
+          {
+            "id": 4,
+            "title": "Commit Seeder Implementation and Test Results",
+            "description": "Commit all seeder code and test scripts to version control with a descriptive message summarizing changes.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use git to stage and commit the new seeder logic and test cases. Include a message such as 'feat: add demo data seeder for products, warehouses, and historical events with integrity tests.'",
+            "status": "pending",
+            "testStrategy": "Verify that all changes are tracked and the commit history is clear and descriptive."
+          },
+          {
+            "id": 5,
+            "title": "Push Seeder Changes to Remote Repository",
+            "description": "Push the committed seeder and test code to the project's remote git repository for team access and CI integration.",
+            "dependencies": [
+              4
+            ],
+            "details": "Execute git push to upload all local commits. Confirm that the remote repository reflects the latest changes and is ready for integration with other sprint tasks.",
+            "status": "pending",
+            "testStrategy": "Check remote repository for updated files and commit logs; ensure CI/CD pipeline (if present) triggers successfully."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Implement Kafka Producer Utilities for Simulated Events",
+        "description": "Create background jobs that produce sales, restock, and return events to Kafka topics at a configurable rate.",
+        "details": "Use Node.js Kafka client to send events to `inventory.sales`, `inventory.restocks`, and `inventory.alerts` topics; randomize event data as per PRD.",
+        "testStrategy": "Monitor Kafka topics for correct event flow; validate event structure and frequency.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up Node.js Kafka Producer Utilities and Configuration",
+            "description": "Initialize the Node.js Kafka client, configure connection to brokers, and set up producer utilities for multiple topics.",
+            "dependencies": [],
+            "details": "Install Kafka client libraries (e.g., kafkajs or kafka-node). Configure connection details (brokers, client ID). Prepare producer instances for each required topic: `inventory.sales`, `inventory.restocks`, and `inventory.alerts`. Ensure configuration allows for adjustable event rates.",
+            "status": "pending",
+            "testStrategy": "Verify producer connects to Kafka cluster and can send a test message to each topic."
+          },
+          {
+            "id": 2,
+            "title": "Implement Simulated Event Generators for Sales, Restock, and Return Events",
+            "description": "Develop background jobs that generate randomized sales, restock, and return events as per PRD requirements.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create functions to generate event payloads with randomized but realistic data (e.g., product ID, quantity, warehouse, timestamp). Implement logic to run these generators at a configurable interval for each event type.",
+            "status": "pending",
+            "testStrategy": "Log generated events locally and confirm data structure matches PRD before sending to Kafka."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Event Producers with Kafka Topics and Configurable Rate Control",
+            "description": "Wire up event generators to send messages to the appropriate Kafka topics at user-defined rates.",
+            "dependencies": [
+              2
+            ],
+            "details": "Connect event generator output to Kafka producer send logic. Implement configuration (via environment variables or config file) to control the frequency of each event type. Ensure each event is sent to the correct topic.",
+            "status": "pending",
+            "testStrategy": "Monitor Kafka topics to confirm correct event flow and frequency; validate that rate changes are respected in real time."
+          },
+          {
+            "id": 4,
+            "title": "Test Kafka Producer Utilities and Event Flow End-to-End",
+            "description": "Thoroughly test the producer utilities, event generation, and Kafka integration for correctness and reliability.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use Kafka consumer tools or a simple consumer script to verify that events are being produced to the correct topics, with correct structure and at the configured rates. Test edge cases such as invalid configuration and Kafka downtime.",
+            "status": "pending",
+            "testStrategy": "Automated and manual tests: consume from topics, validate event payloads, simulate configuration changes and broker failures."
+          },
+          {
+            "id": 5,
+            "title": "Commit, Document, and Push Kafka Producer Utilities to Repository",
+            "description": "Commit all changes with a descriptive message, update documentation, and push to the git repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Write a clear commit message summarizing implemented features and tests. Update README or relevant docs to describe configuration and usage. Push all changes to the remote repository.",
+            "status": "pending",
+            "testStrategy": "Verify code is present and accessible in the repository; review documentation for completeness and accuracy."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Implement Kafka Consumer Utilities for Stock Updates and Alerts",
+        "description": "Create consumers for stock updates, alert triggers, and forecasting events, processing incoming Kafka messages.",
+        "details": "Set up Node.js Kafka consumers for each topic; update inventory and trigger alerts based on event logic.",
+        "testStrategy": "Simulate event flow and verify inventory updates and alert generation; unit test consumer logic.",
+        "priority": "high",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up Node.js Kafka Consumer Utilities for Stock Updates, Alerts, and Forecasting",
+            "description": "Initialize Kafka consumer instances for each required topic: stock updates, alert triggers, and forecasting events.",
+            "dependencies": [],
+            "details": "Install a Kafka client library (e.g., kafkajs or kafka-node). Configure consumers with appropriate group IDs and subscribe to relevant topics. Ensure each consumer is isolated for its event type and can run concurrently.",
+            "status": "pending",
+            "testStrategy": "Verify consumer connection and subscription to topics using mock Kafka messages; check logs for successful message receipt."
+          },
+          {
+            "id": 2,
+            "title": "Implement Message Processing Logic for Inventory Updates and Alert Triggers",
+            "description": "Write logic to process incoming Kafka messages, updating inventory and triggering alerts based on event content.",
+            "dependencies": [
+              1
+            ],
+            "details": "For stock update events, update inventory quantities in the database. For alert events, evaluate thresholds and trigger restock/reorder alerts. For forecasting events, store or forward predictions for dashboard display.",
+            "status": "pending",
+            "testStrategy": "Unit test message handlers with sample payloads; simulate edge cases (e.g., rapid depletion, stockout) and verify correct inventory and alert updates."
+          },
+          {
+            "id": 3,
+            "title": "Integrate AI Forecasting Model Invocation within Consumer Logic",
+            "description": "Connect forecasting event consumer to invoke ARIMA or Prophet model and process predictions for stock needs.",
+            "dependencies": [
+              2
+            ],
+            "details": "On receiving forecasting events, call the AI model (local or API) with current inventory data. Parse and store prediction results for use in alerts and dashboard. Handle errors gracefully.",
+            "status": "pending",
+            "testStrategy": "Mock forecasting events and validate model invocation, result parsing, and error handling; check prediction accuracy against sample data."
+          },
+          {
+            "id": 4,
+            "title": "Test Kafka Consumer Utilities End-to-End with Simulated Event Flow",
+            "description": "Thoroughly test the entire consumer pipeline by simulating event production and verifying real-time updates and alert generation.",
+            "dependencies": [
+              3
+            ],
+            "details": "Produce test events to Kafka topics for stock updates, alerts, and forecasting. Monitor consumer logs, database updates, and alert triggers. Validate that all event types are processed correctly and actions are taken as expected.",
+            "status": "pending",
+            "testStrategy": "Automated integration tests using mock Kafka producers; verify inventory, alert, and prediction updates in the system."
+          },
+          {
+            "id": 5,
+            "title": "Commit and Push Kafka Consumer Utilities with Descriptive Messages",
+            "description": "Commit all changes related to Kafka consumer utilities and push to the git repository with clear, descriptive commit messages.",
+            "dependencies": [
+              4
+            ],
+            "details": "Stage all relevant files, write a commit message summarizing implemented features (e.g., 'feat: add Kafka consumers for stock updates, alerts, and forecasting'), and push to the remote repository.",
+            "status": "pending",
+            "testStrategy": "Verify that all committed files are present in the remote repository; review commit history for clarity and completeness."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Build API Routes for Products, Events, Alerts, and Forecasts",
+        "description": "Expose RESTful endpoints for CRUD operations and streaming data to the frontend.",
+        "details": "Implement Next.js API routes: `/api/products`, `/api/events`, `/api/alerts`, `/api/forecast`; ensure endpoints return correct data and support updates.",
+        "testStrategy": "Use Postman or curl to test all endpoints; validate responses and error handling.",
+        "priority": "high",
+        "dependencies": [
+          4,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement CRUD API Routes for Products, Events, Alerts, and Forecasts",
+            "description": "Create Next.js API route handlers for /api/products, /api/events, /api/alerts, and /api/forecast supporting basic CRUD operations.",
+            "dependencies": [],
+            "details": "Set up route handler files in the app/api directory for each resource. Implement GET, POST, PUT, and DELETE methods for products, events, alerts, and forecasts. Ensure each handler interacts with in-memory or mock data for MVP. Use Next.js conventions for request/response handling and TypeScript types for safety.",
+            "status": "pending",
+            "testStrategy": "Use Postman or curl to verify each endpoint supports expected CRUD operations and returns correct status codes and data."
+          },
+          {
+            "id": 2,
+            "title": "Integrate Event-Driven Kafka Logic into API Routes",
+            "description": "Connect API routes to Kafka producers and consumers for real-time stock updates and event streaming.",
+            "dependencies": [
+              1
+            ],
+            "details": "Within event and product API handlers, publish relevant events to Kafka when stock changes occur. Set up Kafka consumers to trigger automated actions (e.g., restock alerts, reorder notifications) and update alert/forecast data. Ensure event streaming logic is encapsulated and can be triggered via API calls.",
+            "status": "pending",
+            "testStrategy": "Simulate API calls that trigger Kafka events; verify that consumers process events and update alerts/forecasts as expected."
+          },
+          {
+            "id": 3,
+            "title": "Integrate AI Forecasting Model into Forecast API Route",
+            "description": "Embed ARIMA or Prophet model logic in /api/forecast to predict stock needs based on historical events.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement a minimal forecasting function using ARIMA or Prophet (or a mock for MVP) that consumes historical sales/restock/return events. Expose predictions via the /api/forecast endpoint. Ensure the model runs efficiently and returns actionable stock forecasts for each product.",
+            "status": "pending",
+            "testStrategy": "Call /api/forecast with sample data; verify the endpoint returns plausible predictions and handles errors gracefully."
+          },
+          {
+            "id": 4,
+            "title": "Test All API Routes for CRUD, Streaming, and Forecasting Functionality",
+            "description": "Thoroughly test all implemented API endpoints for correct CRUD operations, event-driven updates, and forecasting responses.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Use Postman, curl, and automated test scripts to validate each endpoint. Check for correct data handling, error responses, and real-time updates. Test edge cases such as invalid input, missing data, and concurrent requests. Document any issues found.",
+            "status": "pending",
+            "testStrategy": "Run manual and automated tests for all endpoints; review logs and outputs for correctness and reliability."
+          },
+          {
+            "id": 5,
+            "title": "Commit and Push All Changes to Git Repository with Descriptive Messages",
+            "description": "Commit all implemented API route code, Kafka integration, forecasting logic, and tests to version control and push to remote repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Write clear commit messages summarizing changes (e.g., 'Add CRUD API routes for products/events/alerts/forecast', 'Integrate Kafka event streaming', 'Implement AI forecasting endpoint', 'Add endpoint tests'). Push all commits to the main branch or feature branch as appropriate.",
+            "status": "pending",
+            "testStrategy": "Verify that all committed code is present in the remote repository and matches local tested functionality."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Implement Event-Driven Alert Logic and Resolution",
+        "description": "Apply alert triggers for low stock, overstock, rapid depletion, and AI recommendations; support auto/manual resolution.",
+        "details": "Write alert logic as per PRD; auto-resolve alerts when conditions change, allow manual resolution via API/UI, and expire unresolved alerts after 24 hours.",
+        "testStrategy": "Unit test alert triggers and resolution; simulate edge cases for each alert type.",
+        "priority": "high",
+        "dependencies": [
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Event-Driven Alert Trigger Logic for Inventory Events",
+            "description": "Develop logic to trigger alerts for low stock, overstock, rapid depletion, and AI recommendations based on real-time inventory events.",
+            "dependencies": [],
+            "details": "Set up event listeners (Kafka consumers) to process inventory update events. Apply business rules to detect low stock, overstock, rapid depletion, and AI-driven recommendations. Generate alert objects when conditions are met, ensuring triggers are decoupled and responsive to real-time changes.",
+            "status": "pending",
+            "testStrategy": "Unit test alert trigger logic with simulated Kafka events for each alert type; verify correct alert generation."
+          },
+          {
+            "id": 2,
+            "title": "Implement Auto-Resolution and Expiry Logic for Alerts",
+            "description": "Enable automatic resolution of alerts when inventory conditions normalize and expire unresolved alerts after 24 hours.",
+            "dependencies": [
+              1
+            ],
+            "details": "Monitor inventory events to detect when alert conditions are no longer met and auto-resolve corresponding alerts. Implement a background job or scheduled task to expire alerts that remain unresolved for 24 hours, updating their status accordingly.",
+            "status": "pending",
+            "testStrategy": "Simulate inventory changes to test auto-resolution; create alerts and verify expiry after 24 hours using mocked time."
+          },
+          {
+            "id": 3,
+            "title": "Implement Manual Alert Resolution via API and UI",
+            "description": "Provide endpoints and UI controls for users to manually resolve alerts.",
+            "dependencies": [
+              1
+            ],
+            "details": "Expose REST API endpoints for manual alert resolution. Update the frontend dashboard to allow users to mark alerts as resolved. Ensure status updates are reflected in the backend and UI in real-time.",
+            "status": "pending",
+            "testStrategy": "Test API endpoints with various alert states; verify UI controls resolve alerts and update status correctly."
+          },
+          {
+            "id": 4,
+            "title": "Test Alert Logic, Resolution, and Expiry Thoroughly",
+            "description": "Conduct comprehensive testing of alert triggers, auto/manual resolution, and expiry mechanisms.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Write and execute unit and integration tests for all alert logic. Simulate edge cases for each alert type, including rapid inventory changes, simultaneous alerts, and manual/auto resolution scenarios. Validate expiry logic with time manipulation.",
+            "status": "pending",
+            "testStrategy": "Automated test suite covering all alert scenarios; manual verification of UI and API behavior."
+          },
+          {
+            "id": 5,
+            "title": "Commit, Document, and Push Changes to Git Repository",
+            "description": "Commit all implemented features and tests with descriptive messages, update documentation, and push to the remote repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Write clear commit messages summarizing alert logic, resolution, and expiry features. Update relevant documentation (README, API docs). Push all changes to the project's git repository for review and deployment.",
+            "status": "pending",
+            "testStrategy": "Verify all committed code passes tests; confirm successful push and documentation updates."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Integrate Simple Forecasting Model (SMA/Prophet)",
+        "description": "Implement a time-series forecasting module for 7-day stock prediction using moving average or Prophet.",
+        "details": "Calculate 7-day predictions based on last 30 days of events; update predictions every 5 minutes and store in memory.",
+        "testStrategy": "Validate forecast accuracy against historical data; unit test prediction logic and update intervals.",
+        "priority": "high",
+        "dependencies": [
+          5,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design and Implement SMA/Prophet Forecasting Module",
+            "description": "Develop a time-series forecasting module using Simple Moving Average (SMA) or Prophet for 7-day stock prediction based on the last 30 days of event data.",
+            "dependencies": [],
+            "details": "Create a Python module that ingests the last 30 days of stock events and outputs 7-day forecasts. Use SMA for a baseline and Prophet for advanced modeling. Ensure compatibility with event-driven architecture and real-time updates.",
+            "status": "pending",
+            "testStrategy": "Unit test prediction logic with synthetic and historical data. Validate output shape and forecast values."
+          },
+          {
+            "id": 2,
+            "title": "Integrate Real-Time Update Mechanism (5-Minute Interval)",
+            "description": "Implement logic to update forecasts every 5 minutes as new events arrive, storing predictions in memory for fast access.",
+            "dependencies": [
+              1
+            ],
+            "details": "Set up a scheduler or event-driven trigger to recalculate and store 7-day predictions every 5 minutes. Ensure thread safety and efficient memory usage for multi-warehouse operations.",
+            "status": "pending",
+            "testStrategy": "Simulate event streams and verify that predictions update at correct intervals and reflect new data."
+          },
+          {
+            "id": 3,
+            "title": "Thoroughly Test Forecasting Module and Real-Time Updates",
+            "description": "Validate the accuracy and reliability of the forecasting module and its real-time update mechanism using historical and synthetic event data.",
+            "dependencies": [
+              2
+            ],
+            "details": "Run integration tests to compare forecast outputs against known historical trends. Measure RMSE and MAPE for Prophet and SMA. Test edge cases such as missing data, abrupt changes, and high-frequency event bursts.",
+            "status": "pending",
+            "testStrategy": "Automated test suite covering unit, integration, and regression scenarios. Manual review of forecast graphs and error metrics."
+          },
+          {
+            "id": 4,
+            "title": "Commit Changes with Descriptive Message",
+            "description": "Commit all implemented code and tests for the forecasting module and update logic to the local git repository with a clear, descriptive message.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use git to stage and commit all relevant files. Write a commit message summarizing the forecasting module, real-time update logic, and test coverage.",
+            "status": "pending",
+            "testStrategy": "Verify commit history and message clarity. Ensure all changes are included and tests pass locally."
+          },
+          {
+            "id": 5,
+            "title": "Push Committed Changes to Remote Git Repository",
+            "description": "Push the committed changes for the forecasting module and related features to the remote git repository for team access and CI/CD integration.",
+            "dependencies": [
+              4
+            ],
+            "details": "Use git push to upload local commits to the remote repository. Confirm successful push and repository status.",
+            "status": "pending",
+            "testStrategy": "Check remote repository for updated code and commit logs. Ensure CI/CD pipeline triggers if configured."
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Integrate Gemini API for AI-Powered Recommendations",
+        "description": "Connect to Gemini API to generate reorder recommendations and insights, caching results for 5-10 minutes.",
+        "details": "Implement Gemini API calls in backend; cache responses, fallback to rule-based logic if API fails, and inject recommendations into alerts.",
+        "testStrategy": "Mock Gemini API responses; test caching and fallback logic; validate recommendations in alert payloads.",
+        "priority": "medium",
+        "dependencies": [
+          9,
+          10
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Gemini API Integration with Secure Key Management",
+            "description": "Set up backend service to connect to the Gemini API, securely manage API keys, and handle authentication.",
+            "dependencies": [],
+            "details": "Register for a Gemini API key, store it securely (e.g., environment variables), and implement backend logic to make authenticated requests to the Gemini API. Ensure all API calls use HTTPS and never expose the key in client-side code. Follow best practices for key rotation and access control.",
+            "status": "pending",
+            "testStrategy": "Unit test API key retrieval and authentication logic; verify that API calls succeed and keys are not exposed in logs or responses."
+          },
+          {
+            "id": 2,
+            "title": "Develop Caching Layer for Gemini API Responses (5-10 min TTL)",
+            "description": "Implement a caching mechanism to store Gemini API responses for 5-10 minutes to reduce redundant calls and improve performance.",
+            "dependencies": [
+              1
+            ],
+            "details": "Integrate an in-memory cache (e.g., Redis or local memory) in the backend. Cache each unique Gemini API response for 5-10 minutes (configurable TTL). Ensure cache is checked before making new API calls and that expired entries are purged.",
+            "status": "pending",
+            "testStrategy": "Write tests to confirm cache hits/misses, TTL expiry, and correct fallback to API when cache is stale."
+          },
+          {
+            "id": 3,
+            "title": "Implement Fallback to Rule-Based Logic on Gemini API Failure",
+            "description": "Ensure the system gracefully falls back to rule-based reorder recommendations if the Gemini API is unavailable or returns errors.",
+            "dependencies": [
+              2
+            ],
+            "details": "Wrap Gemini API calls in robust error handling (try/catch). On failure (timeout, error response), invoke existing rule-based logic to generate recommendations. Log all failures and fallback events for monitoring.",
+            "status": "pending",
+            "testStrategy": "Simulate API failures and verify that rule-based logic is triggered and recommendations are still generated."
+          },
+          {
+            "id": 4,
+            "title": "Inject AI Recommendations into Event-Driven Alerts Pipeline",
+            "description": "Integrate Gemini-powered (or fallback) recommendations into the event-driven alert system, ensuring real-time updates and correct payload structure.",
+            "dependencies": [
+              3
+            ],
+            "details": "Modify the alert generation logic to include AI-generated reorder recommendations in alert payloads. Ensure compatibility with Kafka event consumers and the centralized dashboard. Validate that recommendations are visible in real-time alerts.",
+            "status": "pending",
+            "testStrategy": "End-to-end test: trigger stock events, verify alerts contain correct recommendations, and check dashboard/UI updates."
+          },
+          {
+            "id": 5,
+            "title": "Test, Commit, and Push Gemini Integration Changes",
+            "description": "Thoroughly test the Gemini integration, commit all changes with a descriptive message, and push to the git repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Run all unit, integration, and end-to-end tests for Gemini API integration, caching, fallback, and alert injection. Review logs for errors. Commit code with a message like 'Integrate Gemini API for AI-powered recommendations with caching and fallback.' Push to the remote repository.",
+            "status": "pending",
+            "testStrategy": "Review test coverage, ensure all tests pass, and verify code is pushed to the correct branch."
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Build Overview Dashboard Page with Real-Time Metrics",
+        "description": "Create `/` dashboard showing metrics cards, live event feed, stock health chart, and alerts panel.",
+        "details": "Use shadcn/ui, Tailwind, and Recharts for UI; poll backend every 2-3 seconds for updates; animate event feed and alerts.",
+        "testStrategy": "Verify real-time updates, chart rendering, and alert display; test responsiveness and dark mode toggle.",
+        "priority": "high",
+        "dependencies": [
+          8,
+          9,
+          10
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Real-Time Metrics Cards and Stock Health Chart",
+            "description": "Develop the dashboard UI for metrics cards and a stock health chart using shadcn/ui, Tailwind, and Recharts, polling the backend every 2-3 seconds for live updates.",
+            "dependencies": [],
+            "details": "Create metrics cards to display key inventory KPIs (e.g., stock levels, sales velocity) and a stock health chart visualizing current and predicted stock using Recharts. Set up polling logic to fetch data from the backend every 2-3 seconds. Ensure the UI is responsive and visually clear.",
+            "status": "pending",
+            "testStrategy": "Mock backend responses to verify metrics and chart update in real time. Check for correct rendering and responsiveness."
+          },
+          {
+            "id": 2,
+            "title": "Add Live Event Feed and Animated Alerts Panel",
+            "description": "Integrate a live event feed and an animated alerts panel to display real-time inventory events and AI-driven alerts.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement a scrolling event feed component that updates as new events arrive from the backend. Build an alerts panel that animates in/out for new restock or reorder alerts, leveraging shadcn/ui and Tailwind for styling and transitions.",
+            "status": "pending",
+            "testStrategy": "Simulate incoming events and alerts; verify feed updates and alert animations trigger correctly without UI lag."
+          },
+          {
+            "id": 3,
+            "title": "Test Dashboard Real-Time Functionality and Responsiveness",
+            "description": "Thoroughly test the dashboard for real-time updates, chart rendering, alert display, and responsiveness across devices.",
+            "dependencies": [
+              2
+            ],
+            "details": "Perform manual and automated tests to ensure metrics, charts, event feed, and alerts update in real time. Test on multiple screen sizes and in dark mode. Validate polling intervals and UI performance under rapid data changes.",
+            "status": "pending",
+            "testStrategy": "Use test data and backend mocks to simulate high-frequency updates. Employ browser dev tools and responsive testing utilities."
+          },
+          {
+            "id": 4,
+            "title": "Commit Dashboard MVP Implementation with Descriptive Message",
+            "description": "Commit all implemented dashboard features and tests to the local git repository with a clear, descriptive commit message.",
+            "dependencies": [
+              3
+            ],
+            "details": "Stage all changes, write a commit message summarizing the MVP dashboard implementation, including real-time metrics, event feed, alerts, and tests.",
+            "status": "pending",
+            "testStrategy": "Verify all files are included in the commit and the message accurately reflects the changes."
+          },
+          {
+            "id": 5,
+            "title": "Push Dashboard MVP Changes to Remote Git Repository",
+            "description": "Push the committed dashboard MVP and tests to the remote git repository to share progress with the team.",
+            "dependencies": [
+              4
+            ],
+            "details": "Ensure the local branch is up to date with remote, resolve any conflicts if necessary, and push the latest commit(s) to the shared repository.",
+            "status": "pending",
+            "testStrategy": "Check that the remote repository reflects the latest changes and all team members can access the updated dashboard code."
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Build Inventory Management Page with Table, Filters, and Actions",
+        "description": "Create `/inventory` page with product table, filters, search, status badges, predicted stock, and quick actions.",
+        "details": "Implement table with shadcn/ui, add filtering/search logic, and connect action buttons to backend APIs.",
+        "testStrategy": "Test table rendering, filter/search accuracy, and action button functionality; validate predicted stock display.",
+        "priority": "high",
+        "dependencies": [
+          8,
+          10
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Inventory Table UI with shadcn/ui Components",
+            "description": "Develop the main inventory table on the /inventory page using shadcn/ui, displaying product data, status badges, predicted stock, and action buttons.",
+            "dependencies": [],
+            "details": "Set up the /inventory route and use shadcn/ui table components to render product data. Include columns for product name, SKU, current stock, predicted stock (from AI model), status badges (e.g., In Stock, Low, Out), and quick action buttons (e.g., restock, details). Ensure the table is responsive and visually clear.",
+            "status": "pending",
+            "testStrategy": "Verify table renders with mock data, columns display correct info, and UI is responsive."
+          },
+          {
+            "id": 2,
+            "title": "Add Filtering, Search, and Status Badge Logic",
+            "description": "Implement filtering and search functionality for the inventory table, and dynamically update status badges based on stock levels and predictions.",
+            "dependencies": [
+              1
+            ],
+            "details": "Integrate input fields for search and dropdowns for filters (e.g., by warehouse, status). Implement logic to filter/search products in real time. Status badges should update based on current and predicted stock (e.g., highlight low stock or predicted stockouts).",
+            "status": "pending",
+            "testStrategy": "Test search and filter inputs for accuracy and responsiveness. Validate badge color/label changes with different stock scenarios."
+          },
+          {
+            "id": 3,
+            "title": "Connect Table and Actions to Backend APIs and Kafka Events",
+            "description": "Wire up the table to fetch live inventory data from backend APIs, subscribe to Kafka-driven real-time updates, and connect action buttons to backend endpoints.",
+            "dependencies": [
+              2
+            ],
+            "details": "Use API calls to load inventory data and predicted stock. Subscribe to Kafka event streams (via WebSocket or polling) to update table in real time when stock changes. Connect quick action buttons (e.g., restock, reorder) to backend endpoints that trigger Kafka producer events.",
+            "status": "pending",
+            "testStrategy": "Simulate backend API and Kafka events; verify table updates in real time and actions trigger correct backend calls."
+          },
+          {
+            "id": 4,
+            "title": "Test Inventory Page Functionality and Real-Time Updates",
+            "description": "Thoroughly test the /inventory page for table rendering, filtering/search, status badges, action buttons, and real-time updates from Kafka events.",
+            "dependencies": [
+              3
+            ],
+            "details": "Perform manual and automated tests to ensure all UI elements work as expected. Validate that real-time updates reflect in the table, filters/search work correctly, and action buttons trigger backend logic. Check for edge cases like rapid stock changes and predicted stockouts.",
+            "status": "pending",
+            "testStrategy": "Use test data and simulated Kafka events to validate all features. Run UI and integration tests for core flows."
+          },
+          {
+            "id": 5,
+            "title": "Commit, Document, and Push Inventory Page Changes",
+            "description": "Commit all changes with a descriptive message, update documentation for the new /inventory page, and push to the git repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Write a clear commit message summarizing the implemented features and tests. Update README or relevant docs to describe the /inventory page, its features, and usage. Push all changes to the remote git repository.",
+            "status": "pending",
+            "testStrategy": "Verify commit history, documentation accuracy, and successful push to remote repository."
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Build Analytics & Forecasting Page with Charts and AI Insights",
+        "description": "Create `/analytics` page with demand forecast chart, product performance, warehouse distribution, AI insights, and CSV export.",
+        "details": "Use Recharts for visualization, display Gemini recommendations, and implement CSV export for analytics data.",
+        "testStrategy": "Validate chart data, AI insights panel, and CSV download; test top/bottom movers and warehouse pie chart.",
+        "priority": "medium",
+        "dependencies": [
+          10,
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Analytics Page Layout and Core Components",
+            "description": "Set up the `/analytics` route and build the page structure with sections for demand forecast, product performance, warehouse distribution, AI insights, and CSV export.",
+            "dependencies": [],
+            "details": "Create the React page and organize layout using a grid or flexbox. Add placeholder components for charts, insights, and export button. Ensure the page is responsive and matches MVP requirements.",
+            "status": "pending",
+            "testStrategy": "Verify page loads correctly, all sections are visible, and layout adapts to different screen sizes."
+          },
+          {
+            "id": 2,
+            "title": "Integrate Real-Time Data and Forecast Chart Using Recharts",
+            "description": "Connect to event-driven backend (Kafka consumers) and display real-time stock levels and 7-day forecast using Recharts.",
+            "dependencies": [
+              1
+            ],
+            "details": "Fetch analytics and forecast data from backend API. Render a line chart for demand forecast and bar/pie charts for product and warehouse metrics. Ensure charts update in real-time as new events arrive.",
+            "status": "pending",
+            "testStrategy": "Simulate backend events and confirm charts update live; validate chart data matches backend payloads."
+          },
+          {
+            "id": 3,
+            "title": "Display AI Insights and Recommendations Panel",
+            "description": "Show Gemini-generated recommendations and insights based on analytics and forecast data.",
+            "dependencies": [
+              2
+            ],
+            "details": "Integrate Gemini API or mock service to fetch AI insights. Render insights in a dedicated panel, highlighting actionable recommendations (e.g., restock alerts, top movers).",
+            "status": "pending",
+            "testStrategy": "Check that AI insights panel displays relevant recommendations and updates when analytics data changes."
+          },
+          {
+            "id": 4,
+            "title": "Implement CSV Export Functionality for Analytics Data",
+            "description": "Allow users to export analytics and forecast data as a CSV file from the `/analytics` page.",
+            "dependencies": [
+              3
+            ],
+            "details": "Add a CSV export button. Serialize current analytics data into CSV format and trigger download. Ensure exported file includes all key metrics and is properly formatted.",
+            "status": "pending",
+            "testStrategy": "Download CSV and verify contents match displayed analytics; check for correct formatting and completeness."
+          },
+          {
+            "id": 5,
+            "title": "Test All Features, Commit Changes, and Push to Repository",
+            "description": "Thoroughly test analytics page features, commit with descriptive message, and push changes to git.",
+            "dependencies": [
+              4
+            ],
+            "details": "Perform manual and automated tests for layout, charts, AI insights, and CSV export. Fix any issues found. Commit with a message summarizing implemented features and push to remote repository.",
+            "status": "pending",
+            "testStrategy": "Run end-to-end tests; verify all features work as intended; confirm commit and push are successful."
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Build Alerts & Actions Page with Real-Time Alert Stream",
+        "description": "Create `/alerts` page showing alert feed, categories, actions (resolve/reorder), and alert history.",
+        "details": "Implement alert stream with filters, category badges, action buttons, and expandable history; poll backend for updates.",
+        "testStrategy": "Test alert filtering, action buttons, and history display; validate real-time updates and badge colors.",
+        "priority": "medium",
+        "dependencies": [
+          9,
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Real-Time Alert Feed with Polling and Filters",
+            "description": "Develop the core `/alerts` page UI to display a real-time alert stream, including filters for categories and status.",
+            "dependencies": [],
+            "details": "Use React to build the alert feed UI. Integrate polling logic (every 2-3 seconds) to fetch alerts from the backend. Implement category filters and status filters (e.g., unresolved, resolved). Display category badges for each alert. Ensure the feed updates in near real-time and handles loading/error states gracefully.",
+            "status": "pending",
+            "testStrategy": "Mock backend responses to verify polling, filter functionality, and badge rendering. Simulate slow/failed API calls to test loading and error handling."
+          },
+          {
+            "id": 2,
+            "title": "Add Action Buttons for Resolve and Reorder with API Integration",
+            "description": "Enable users to resolve or trigger reorder actions directly from the alert feed, updating alert status via API.",
+            "dependencies": [
+              1
+            ],
+            "details": "For each alert, display 'Resolve' and 'Reorder' buttons. On click, call the appropriate backend API to update the alert status or trigger a reorder. Optimistically update the UI for responsiveness. Handle API errors and display feedback to the user.",
+            "status": "pending",
+            "testStrategy": "Unit test button actions with mock APIs. Verify UI updates correctly on success and error. Ensure only actionable alerts show buttons."
+          },
+          {
+            "id": 3,
+            "title": "Implement Expandable Alert History Panel",
+            "description": "Allow users to expand an alert to view its full history, including previous status changes and related actions.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add an expandable/collapsible panel for each alert row. When expanded, fetch and display the alert's history from the backend (status changes, actions taken, timestamps). Ensure smooth UX and efficient data loading.",
+            "status": "pending",
+            "testStrategy": "Test expanding/collapsing alerts, verify correct history data loads, and handle empty or error states."
+          },
+          {
+            "id": 4,
+            "title": "Test Alerts Page Functionality and Real-Time Updates",
+            "description": "Thoroughly test the `/alerts` page for real-time updates, action handling, filtering, and history display.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Perform end-to-end testing: simulate alert generation, resolution, and reorder actions. Validate polling updates, filter logic, badge colors, and expandable history. Test edge cases such as rapid alert changes and backend failures.",
+            "status": "pending",
+            "testStrategy": "Use Cypress or React Testing Library for UI tests. Mock Kafka event streams and backend APIs to simulate real-time scenarios."
+          },
+          {
+            "id": 5,
+            "title": "Commit and Push Changes with Descriptive Messages",
+            "description": "Commit all implemented features and tests to git with clear, descriptive commit messages, then push to the repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Stage all changes, write a commit message summarizing the implemented `/alerts` page, real-time polling, actions, and tests. Push the commit to the remote repository to ensure code is backed up and available for review.",
+            "status": "pending",
+            "testStrategy": null
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "title": "Build Event Logs Page with Real-Time Event Stream and Statistics",
+        "description": "Create `/events` page showing all Kafka events, filtering by type/time range, expandable JSON view, and event statistics charts.",
+        "details": "Implement event stream UI, filtering controls, expandable event details, and charts for event counts by type.",
+        "testStrategy": "Verify event stream accuracy, filter functionality, and chart rendering; test expandable JSON view.",
+        "priority": "medium",
+        "dependencies": [
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Real-Time Event Stream UI for /events Page",
+            "description": "Develop the core UI to display a real-time stream of Kafka events on the /events page, showing event metadata and supporting live updates.",
+            "dependencies": [],
+            "details": "Use a frontend framework (e.g., React) to connect to the backend event stream API. Render a list of incoming Kafka events with essential metadata (timestamp, type, ID). Ensure the UI updates in real-time as new events arrive, using polling or websockets as appropriate for MVP.",
+            "status": "pending",
+            "testStrategy": "Simulate event flow with test Kafka events; verify that new events appear in the UI without manual refresh."
+          },
+          {
+            "id": 2,
+            "title": "Add Filtering Controls for Event Type and Time Range",
+            "description": "Enable users to filter displayed events by event type and time range, updating the event list accordingly.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement dropdowns or multi-select controls for event type and a date/time picker for time range. Integrate these controls with the event stream query logic so only matching events are shown. Ensure filters can be changed dynamically without page reload.",
+            "status": "pending",
+            "testStrategy": "Test with various filter combinations; confirm only relevant events are displayed and filters reset/clear as expected."
+          },
+          {
+            "id": 3,
+            "title": "Implement Expandable JSON View for Event Details",
+            "description": "Allow users to expand any event row to view the full event payload in a formatted, readable JSON view.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add an expand/collapse button or icon to each event row. When expanded, render the event's JSON payload using a syntax highlighter or JSON viewer component for readability. Ensure large payloads are handled efficiently.",
+            "status": "pending",
+            "testStrategy": "Expand several events with different payload sizes; verify correct formatting, no UI lag, and proper collapse behavior."
+          },
+          {
+            "id": 4,
+            "title": "Display Event Statistics Charts (Counts by Type and Over Time)",
+            "description": "Visualize event statistics with charts showing event counts by type and over selected time ranges.",
+            "dependencies": [
+              2
+            ],
+            "details": "Integrate a charting library (e.g., Recharts or Chart.js) to display bar or line charts for event counts by type and time. Ensure charts update in real-time as new events arrive or filters change. Place charts above or beside the event list for visibility.",
+            "status": "pending",
+            "testStrategy": "Trigger events of various types and times; verify charts update accurately and match the filtered event list."
+          },
+          {
+            "id": 5,
+            "title": "Test, Commit, and Push Event Logs Page MVP",
+            "description": "Thoroughly test all features, commit changes with a descriptive message, and push to the git repository.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Perform end-to-end testing of the /events page: real-time updates, filtering, expandable JSON, and charts. Fix any critical bugs. Commit with a message like 'feat: MVP /events page with real-time stream, filters, JSON view, and stats charts'. Push to the remote repository.",
+            "status": "pending",
+            "testStrategy": "Manual regression test of all features; verify git commit history and remote branch reflect the latest changes."
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "title": "Implement Frontend Real-Time Polling and Loading/Error States",
+        "description": "Add polling logic to all pages for real-time updates; implement loading spinners and error handling for API calls.",
+        "details": "Use React hooks for polling every 2-3 seconds; display loading indicators and error toasts using shadcn/ui.",
+        "testStrategy": "Simulate slow/failed API responses; verify loading and error states across all pages.",
+        "priority": "medium",
+        "dependencies": [
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Custom React Polling Hook for Real-Time Updates",
+            "description": "Create a reusable React hook to poll API endpoints every 2-3 seconds for real-time inventory, prediction, and alert data.",
+            "dependencies": [],
+            "details": "Develop a custom hook (e.g., usePolling) using useEffect and setInterval to fetch data at a configurable interval. Ensure cleanup on unmount to prevent memory leaks. Integrate with all dashboard pages to update stock levels, predictions, and alerts in real time.",
+            "status": "pending",
+            "testStrategy": "Mock API endpoints and verify that polling occurs at the correct interval. Confirm that data updates in the UI without manual refresh.[1][2][3]"
+          },
+          {
+            "id": 2,
+            "title": "Integrate Loading Spinners Using shadcn/ui Components",
+            "description": "Display loading indicators on all pages during API polling and data fetch operations.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use shadcn/ui spinner components to show loading states while API requests are in progress. Ensure spinners are visible during initial load and subsequent polling cycles. Hide spinners when data is successfully fetched.",
+            "status": "pending",
+            "testStrategy": "Simulate slow API responses and verify that loading spinners appear and disappear appropriately on all relevant pages."
+          },
+          {
+            "id": 3,
+            "title": "Implement Error Handling and Toast Notifications for API Failures",
+            "description": "Add error handling logic to display toast notifications using shadcn/ui when API calls fail during polling.",
+            "dependencies": [
+              1
+            ],
+            "details": "Catch errors in the polling hook and display user-friendly error toasts. Ensure errors do not break the polling loop and allow for retry logic. Log errors for debugging and provide clear feedback to users.",
+            "status": "pending",
+            "testStrategy": "Force API failures (e.g., network disconnect, server error) and verify that error toasts are shown and polling resumes or retries as expected.[3]"
+          },
+          {
+            "id": 4,
+            "title": "Test Real-Time Polling, Loading, and Error States Across Dashboard",
+            "description": "Thoroughly test the polling, loading, and error handling features on all dashboard pages to ensure reliability and user experience.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Simulate various scenarios: normal operation, slow responses, and API failures. Confirm that stock levels, predictions, and alerts update in real time, loading spinners display correctly, and errors are handled gracefully.",
+            "status": "pending",
+            "testStrategy": "Use mock servers and network throttling tools to simulate different API behaviors. Validate UI state transitions and user feedback."
+          },
+          {
+            "id": 5,
+            "title": "Commit, Document, and Push Changes to Git Repository",
+            "description": "Commit all implemented features with descriptive messages and push to the project git repository.",
+            "dependencies": [
+              4
+            ],
+            "details": "Write clear commit messages summarizing polling logic, loading/error state integration, and test coverage. Push changes to the remote repository and ensure all code is versioned for review.",
+            "status": "pending",
+            "testStrategy": "Verify that all changes are committed and pushed. Review commit history for clarity and completeness."
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "title": "Write README Documentation and Capture Demo Screenshots",
+        "description": "Document setup instructions, architecture diagram, and usage; capture screenshots/video of all pages for deliverables.",
+        "details": "Write comprehensive README with setup, Makefile usage, architecture diagram, and demo walkthrough; save screenshots/video.",
+        "testStrategy": "Review documentation for completeness and clarity; verify all deliverables are present.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          2,
+          3,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Draft Project Overview and Setup Instructions in README",
+            "description": "Write a clear project overview, setup prerequisites, and step-by-step installation instructions in the README.md file.",
+            "dependencies": [],
+            "details": "Include a concise description of the AI-Enhanced Event-Driven Inventory Management System, its purpose, and key features. List all prerequisites (Docker, Node.js, etc.) and provide detailed setup steps, including Docker Compose and Makefile usage. Ensure instructions are actionable for new developers.",
+            "status": "pending",
+            "testStrategy": "Have a team member follow the setup instructions from scratch and confirm successful local deployment."
+          },
+          {
+            "id": 2,
+            "title": "Document System Architecture and Event Flow with Diagram",
+            "description": "Create and embed an architecture diagram illustrating the event-driven Kafka flow, forecasting model, and dashboard integration.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use a diagram tool (e.g., Excalidraw, draw.io) to visualize producers, Kafka topics, consumers, forecasting model, and dashboard. Add the diagram to the README with a brief explanation of each component and their interactions.",
+            "status": "pending",
+            "testStrategy": "Review the diagram for accuracy and clarity; verify all major system components and data flows are represented."
+          },
+          {
+            "id": 3,
+            "title": "Write Usage Guide and Demo Walkthrough in README",
+            "description": "Add a section to the README explaining how to use the system, including running the dashboard, triggering events, and interpreting AI-driven alerts.",
+            "dependencies": [
+              2
+            ],
+            "details": "Describe typical user actions: starting the system, simulating sales events, viewing real-time updates, and understanding forecasting outputs. Include example commands and screenshots where relevant.",
+            "status": "pending",
+            "testStrategy": "Walk through the guide step-by-step and verify that each instruction matches the current system behavior."
+          },
+          {
+            "id": 4,
+            "title": "Capture and Annotate Demo Screenshots or Video",
+            "description": "Take screenshots or record a short video of all key pages and features, then add them to the README or a /docs folder.",
+            "dependencies": [
+              3
+            ],
+            "details": "Capture the dashboard, real-time stock updates, AI predictions, and alert notifications. Annotate images or video as needed for clarity. Reference these assets in the README walkthrough.",
+            "status": "pending",
+            "testStrategy": "Verify all major features are visually documented and assets are accessible from the README."
+          },
+          {
+            "id": 5,
+            "title": "Review, Test, and Commit Documentation and Assets",
+            "description": "Thoroughly review the README and demo assets for completeness and clarity, then commit and push all changes to the git repository with a descriptive message.",
+            "dependencies": [
+              4
+            ],
+            "details": "Check that the README covers overview, setup, architecture, usage, and demo. Ensure all screenshots/videos are present and correctly referenced. Commit with a message like 'Add comprehensive README and demo assets for MVP'. Push to remote repository.",
+            "status": "pending",
+            "testStrategy": "Peer review the documentation and verify all deliverables are present in the repository."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-11-04T15:51:07.611Z",
+      "updated": "2025-11-04T16:08:55.836Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
