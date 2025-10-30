@@ -9,7 +9,7 @@
         "testStrategy": "Verify project builds and runs locally; check that shadcn/ui and Tailwind CSS styles render correctly on a sample page.",
         "priority": "high",
         "dependencies": [],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -50,7 +50,7 @@
               3
             ],
             "details": "Verify that the app runs, Tailwind styles apply, and shadcn/ui components render. Check for errors or warnings. Stage all files, commit with a descriptive message (e.g., 'Initial project setup with Next.js 14, Tailwind CSS, shadcn/ui'), and push to the remote repository.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Manual end-to-end check in browser. Confirm git commit and push succeed; verify repository reflects changes."
           },
           {
@@ -61,7 +61,7 @@
               4
             ],
             "details": "Create folders such as `/app/dashboard`, `/components`, `/app/events`, and `/app/alerts` to prepare for MVP development. Add placeholder files or README.md in each to document intended use.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check that all folders exist and are tracked in git. Confirm the app still builds and runs after structure changes."
           }
         ]
@@ -74,7 +74,7 @@
         "testStrategy": "Run `docker-compose up` and verify Kafka and Zookeeper are accessible; check logs for successful startup.",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -82,7 +82,7 @@
             "description": "Create an initial docker-compose.yml file defining both Kafka and Zookeeper services with required images and environment variables.",
             "dependencies": [],
             "details": "Write a docker-compose.yml file specifying services for Zookeeper (using the official image, exposing port 2181) and Kafka (using the official image, exposing port 9092). Set necessary environment variables such as KAFKA_ZOOKEEPER_CONNECT, KAFKA_ADVERTISED_LISTENERS, and ensure service names match connection strings. Use restart policies and map ports for local access.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check that the YAML is valid and all required fields are present for both services."
           },
           {
@@ -93,7 +93,7 @@
               1
             ],
             "details": "Add a custom Docker network if needed, configure named volumes for Kafka data persistence, and ensure environment variables (e.g., KAFKA_BROKER_ID, KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR) are set for a single-node local setup. Document any host IP requirements for KAFKA_ADVERTISED_LISTENERS.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Inspect docker-compose.yml for correct network and volume configuration; verify environment variables are set for local use."
           },
           {
@@ -104,7 +104,7 @@
               2
             ],
             "details": "Execute 'docker-compose up' and monitor logs for successful startup messages from both services. Use docker ps to confirm containers are running. Optionally, use a Kafka client or CLI to connect to the broker and Zookeeper to verify connectivity.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check logs for 'started' messages, ensure ports 2181 and 9092 are open, and use a Kafka CLI tool to list topics or connect to the broker."
           },
           {
@@ -115,7 +115,7 @@
               3
             ],
             "details": "Stage docker-compose.yml and any supporting files (e.g., .env, README.md), then commit with a message such as 'Add Docker Compose setup for Kafka and Zookeeper with local development configuration.'",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that the commit includes all relevant files and the message accurately describes the changes."
           },
           {
@@ -126,7 +126,7 @@
               4
             ],
             "details": "Use 'git push' to upload the committed changes to the remote repository. Confirm that the files appear in the remote repo and are accessible to collaborators.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check the remote repository for the new commit and verify that docker-compose.yml and related files are present."
           }
         ]
@@ -141,7 +141,7 @@
         "dependencies": [
           2
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -149,7 +149,7 @@
             "description": "Create an initial Makefile with targets for dev, docker-up, docker-down, clean, and logs as specified in the PRD.",
             "dependencies": [],
             "details": "Write Makefile targets: 'dev' (development environment), 'docker-up' (start all services), 'docker-down' (stop all services), 'clean' (remove Docker volumes/containers), and 'logs' (show service logs). Use clear comments for each target and ensure commands are compatible with the project's Docker/Kafka stack.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run 'make <target>' for each target and verify the correct shell/Docker commands execute as expected."
           },
           {
@@ -160,7 +160,7 @@
               1
             ],
             "details": "For each target, run the corresponding 'make' command. Confirm that 'dev' starts the development stack, 'docker-up' brings up all containers, 'docker-down' stops them, 'clean' removes volumes/containers, and 'logs' outputs service logs. Document any issues or unexpected behaviors.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Observe Docker container status, check logs output, and verify cleanup by inspecting Docker volumes and containers after each command."
           },
           {
@@ -171,7 +171,7 @@
               2
             ],
             "details": "Add a 'help' target that lists all available commands and their descriptions using comments (##) and a grep/sed script. Ensure each target is clearly documented for team use. Set the default goal to 'help' for user-friendliness.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run 'make' and 'make help' to verify that all targets and their descriptions are listed correctly."
           },
           {
@@ -182,7 +182,7 @@
               3
             ],
             "details": "Stage the Makefile and any updated documentation. Write a commit message such as 'Add Makefile for project orchestration with dev, docker-up, docker-down, clean, logs, and help targets.'",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check git log to confirm the commit is present and includes all intended files."
           },
           {
@@ -193,7 +193,7 @@
               4
             ],
             "details": "Use 'git push' to upload the latest commit to the remote repository. Ensure the branch is up to date and that the Makefile is accessible to the team.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify on the remote repository (e.g., GitHub/GitLab) that the Makefile and documentation are present and up to date."
           }
         ]
@@ -208,7 +208,7 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -216,7 +216,7 @@
             "description": "Create TypeScript interfaces that represent the Product, Event, and Alert entities according to the PRD schema.",
             "dependencies": [],
             "details": "Analyze the PRD schema and translate each entity (Product, Event, Alert) into a strongly-typed TypeScript interface, ensuring all required fields and types are covered for MVP functionality.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to validate that the interfaces enforce correct typing and required fields."
           },
           {
@@ -227,7 +227,7 @@
               1
             ],
             "details": "Use JavaScript Maps or arrays to hold instances of each entity type, supporting efficient CRUD operations and real-time updates as required by the event-driven architecture.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test CRUD operations on each in-memory store; verify data integrity and correct linkage between entities."
           },
           {
@@ -238,7 +238,7 @@
               2
             ],
             "details": "Set up functions to handle simulated Kafka events (e.g., stock updates, sales, restocks) that update in-memory stores and trigger alert creation or resolution as per business rules.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Simulate event flows and verify that inventory updates and alerts are processed and reflected in the in-memory stores as expected."
           },
           {
@@ -249,7 +249,7 @@
               3
             ],
             "details": "Write and execute unit and integration tests covering CRUD operations, event processing, alert triggering, and edge cases (e.g., overselling, stockouts).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Automated test suite with coverage reports; manual verification of key event-driven scenarios."
           },
           {
@@ -260,7 +260,7 @@
               4
             ],
             "details": "Stage all changes, write a commit message summarizing the implemented data models and event-driven logic, and push to the main branch to ensure code is versioned and available for team review.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that all changes are present in the remote repository and that commit history accurately reflects the work completed."
           }
         ]
@@ -275,7 +275,7 @@
         "dependencies": [
           4
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -283,7 +283,7 @@
             "description": "Plan and structure the data seeder to generate demo products, warehouses, and historical events for the inventory system.",
             "dependencies": [],
             "details": "Define the schema for products (10-15 items), warehouses (3 locations), and event types (sales, restock, return). Specify realistic attributes and relationships to support forecasting and event-driven flows.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Review schema definitions and ensure all required fields are present for each entity."
           },
           {
@@ -294,7 +294,7 @@
               1
             ],
             "details": "Write functions to generate random but plausible product data, assign products to warehouses, and simulate daily sales, restocks, and returns. Ensure events are timestamped and linked to products and warehouses.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the seeder and inspect in-memory data stores for correct entity counts and relationships."
           },
           {
@@ -305,7 +305,7 @@
               2
             ],
             "details": "Validate that all products and warehouses are created, each product is assigned to at least one warehouse, and events cover the full 30-day range with appropriate types and quantities. Check for edge cases like overselling or missing restocks.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write automated tests to verify entity counts, event types, date ranges, and warehouse assignments. Manually inspect sample data for realism."
           },
           {
@@ -316,7 +316,7 @@
               3
             ],
             "details": "Use git to stage and commit the new seeder logic and test cases. Include a message such as 'feat: add demo data seeder for products, warehouses, and historical events with integrity tests.'",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that all changes are tracked and the commit history is clear and descriptive."
           },
           {
@@ -327,7 +327,7 @@
               4
             ],
             "details": "Execute git push to upload all local commits. Confirm that the remote repository reflects the latest changes and is ready for integration with other sprint tasks.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check remote repository for updated files and commit logs; ensure CI/CD pipeline (if present) triggers successfully."
           }
         ]
@@ -343,7 +343,7 @@
           2,
           5
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -351,7 +351,7 @@
             "description": "Initialize the Node.js Kafka client, configure connection to brokers, and set up producer utilities for multiple topics.",
             "dependencies": [],
             "details": "Install Kafka client libraries (e.g., kafkajs or kafka-node). Configure connection details (brokers, client ID). Prepare producer instances for each required topic: `inventory.sales`, `inventory.restocks`, and `inventory.alerts`. Ensure configuration allows for adjustable event rates.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify producer connects to Kafka cluster and can send a test message to each topic."
           },
           {
@@ -362,7 +362,7 @@
               1
             ],
             "details": "Create functions to generate event payloads with randomized but realistic data (e.g., product ID, quantity, warehouse, timestamp). Implement logic to run these generators at a configurable interval for each event type.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Log generated events locally and confirm data structure matches PRD before sending to Kafka."
           },
           {
@@ -373,7 +373,7 @@
               2
             ],
             "details": "Connect event generator output to Kafka producer send logic. Implement configuration (via environment variables or config file) to control the frequency of each event type. Ensure each event is sent to the correct topic.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Monitor Kafka topics to confirm correct event flow and frequency; validate that rate changes are respected in real time."
           },
           {
@@ -384,7 +384,7 @@
               3
             ],
             "details": "Use Kafka consumer tools or a simple consumer script to verify that events are being produced to the correct topics, with correct structure and at the configured rates. Test edge cases such as invalid configuration and Kafka downtime.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Automated and manual tests: consume from topics, validate event payloads, simulate configuration changes and broker failures."
           },
           {
@@ -395,7 +395,7 @@
               4
             ],
             "details": "Write a clear commit message summarizing implemented features and tests. Update README or relevant docs to describe configuration and usage. Push all changes to the remote repository.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify code is present and accessible in the repository; review documentation for completeness and accuracy."
           }
         ]
@@ -410,7 +410,7 @@
         "dependencies": [
           6
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -418,7 +418,7 @@
             "description": "Initialize Kafka consumer instances for each required topic: stock updates, alert triggers, and forecasting events.",
             "dependencies": [],
             "details": "Install a Kafka client library (e.g., kafkajs or kafka-node). Configure consumers with appropriate group IDs and subscribe to relevant topics. Ensure each consumer is isolated for its event type and can run concurrently.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify consumer connection and subscription to topics using mock Kafka messages; check logs for successful message receipt."
           },
           {
@@ -429,7 +429,7 @@
               1
             ],
             "details": "For stock update events, update inventory quantities in the database. For alert events, evaluate thresholds and trigger restock/reorder alerts. For forecasting events, store or forward predictions for dashboard display.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Unit test message handlers with sample payloads; simulate edge cases (e.g., rapid depletion, stockout) and verify correct inventory and alert updates."
           },
           {
@@ -440,7 +440,7 @@
               2
             ],
             "details": "On receiving forecasting events, call the AI model (local or API) with current inventory data. Parse and store prediction results for use in alerts and dashboard. Handle errors gracefully.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Mock forecasting events and validate model invocation, result parsing, and error handling; check prediction accuracy against sample data."
           },
           {
@@ -451,7 +451,7 @@
               3
             ],
             "details": "Produce test events to Kafka topics for stock updates, alerts, and forecasting. Monitor consumer logs, database updates, and alert triggers. Validate that all event types are processed correctly and actions are taken as expected.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Automated integration tests using mock Kafka producers; verify inventory, alert, and prediction updates in the system."
           },
           {
@@ -462,7 +462,7 @@
               4
             ],
             "details": "Stage all relevant files, write a commit message summarizing implemented features (e.g., 'feat: add Kafka consumers for stock updates, alerts, and forecasting'), and push to the remote repository.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that all committed files are present in the remote repository; review commit history for clarity and completeness."
           }
         ]
@@ -478,7 +478,7 @@
           4,
           7
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -486,7 +486,7 @@
             "description": "Create Next.js API route handlers for /api/products, /api/events, /api/alerts, and /api/forecast supporting basic CRUD operations.",
             "dependencies": [],
             "details": "Set up route handler files in the app/api directory for each resource. Implement GET, POST, PUT, and DELETE methods for products, events, alerts, and forecasts. Ensure each handler interacts with in-memory or mock data for MVP. Use Next.js conventions for request/response handling and TypeScript types for safety.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Use Postman or curl to verify each endpoint supports expected CRUD operations and returns correct status codes and data."
           },
           {
@@ -1240,7 +1240,7 @@
     ],
     "metadata": {
       "created": "2025-11-04T15:51:07.611Z",
-      "updated": "2025-11-04T16:08:55.836Z",
+      "updated": "2025-11-04T16:41:53.712Z",
       "description": "Tasks for master context"
     }
   }
