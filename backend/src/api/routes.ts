@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { productStore, alertStore, eventStore } from '../stores/InMemoryStore';
 import { sendEvent } from '../kafka/producer';
 import { Event } from '../models/types';
+import { generateForecasts, calculateSMAForecast } from '../services/Forecasting';
 
 const router = express.Router();
 
@@ -313,6 +314,51 @@ router.get('/metrics', (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       error: 'Failed to fetch metrics',
+    });
+  }
+});
+
+// Forecast API
+router.get('/forecast', (req: Request, res: Response) => {
+  try {
+    const { productId, days = '7' } = req.query;
+    const forecastDays = parseInt(days as string);
+
+    const products = productStore.getAll();
+    const events = eventStore.getAll();
+
+    // Generate forecast for specific product or all products
+    if (productId) {
+      const product = productStore.get(productId as string);
+      if (!product) {
+        return res.status(404).json({
+          success: false,
+          error: 'Product not found',
+        });
+      }
+
+      const forecast = calculateSMAForecast(product, events, forecastDays);
+
+      res.json({
+        success: true,
+        data: forecast,
+        timestamp: new Date().toISOString(),
+      });
+    } else {
+      const forecasts = generateForecasts(products, events, forecastDays);
+
+      res.json({
+        success: true,
+        data: forecasts,
+        count: forecasts.length,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  } catch (error) {
+    console.error('Error generating forecast:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to generate forecast',
     });
   }
 });
