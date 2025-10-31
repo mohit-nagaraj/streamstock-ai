@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express';
 import { productStore, alertStore, eventStore } from '../stores/InMemoryStore';
+import { sendEvent } from '../kafka/producer';
+import { Event } from '../models/types';
 
 const router = express.Router();
 
@@ -63,16 +65,42 @@ router.get('/products/:id', (req: Request, res: Response) => {
   }
 });
 
-router.put('/products/:id', (req: Request, res: Response) => {
+router.put('/products/:id', async (req: Request, res: Response) => {
   try {
+    const productId = req.params.id;
     const updates = req.body;
-    const product = productStore.update(req.params.id, updates);
+    const oldProduct = productStore.get(productId);
 
-    if (!product) {
+    if (!oldProduct) {
       return res.status(404).json({
         success: false,
         error: 'Product not found',
       });
+    }
+
+    const product = productStore.update(productId, updates);
+
+    // If stock changed, publish event to Kafka
+    if (updates.currentStock !== undefined && updates.currentStock !== oldProduct.currentStock) {
+      const stockChange = updates.currentStock - oldProduct.currentStock;
+      const eventType = stockChange > 0 ? 'RESTOCK' : 'SALE';
+
+      const event: Event = {
+        id: `EVT-API-${Date.now()}`,
+        type: eventType,
+        productId: productId,
+        quantity: Math.abs(stockChange),
+        warehouse: product!.warehouse,
+        timestamp: new Date(),
+        metadata: { source: 'api', manual: true },
+      };
+
+      // Publish to Kafka (fire and forget for API responsiveness)
+      sendEvent(event).catch(err => {
+        console.error('Failed to publish event to Kafka:', err);
+      });
+
+      console.log(`📤 API triggered event: ${eventType} - ${productId} (${stockChange > 0 ? '+' : ''}${stockChange} units)`);
     }
 
     res.json({
@@ -107,15 +135,23 @@ router.get('/events', (req: Request, res: Response) => {
       events = eventStore.getByWarehouse(warehouse as string);
     }
 
-    // Get recent events
-    events = events
-      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
-      .slice(0, parseInt(limit as string));
+    // Get recent events and serialize properly
+    const recentEvents = events
+      .sort((a, b) => {
+        const timeA = a.timestamp instanceof Date ? a.timestamp.getTime() : new Date(a.timestamp).getTime();
+        const timeB = b.timestamp instanceof Date ? b.timestamp.getTime() : new Date(b.timestamp).getTime();
+        return timeB - timeA;
+      })
+      .slice(0, parseInt(limit as string))
+      .map(e => ({
+        ...e,
+        timestamp: e.timestamp instanceof Date ? e.timestamp.toISOString() : e.timestamp,
+      }));
 
     res.json({
       success: true,
-      data: events,
-      count: events.length,
+      data: recentEvents,
+      count: recentEvents.length,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
@@ -123,6 +159,59 @@ router.get('/events', (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       error: 'Failed to fetch events',
+    });
+  }
+});
+
+// POST endpoint to manually create events (for testing Kafka integration)
+router.post('/events', async (req: Request, res: Response) => {
+  try {
+    const { type, productId, quantity, warehouse } = req.body;
+
+    // Validate required fields
+    if (!type || !productId || !quantity) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing required fields: type, productId, quantity',
+      });
+    }
+
+    // Get product to determine warehouse if not provided
+    const product = productStore.get(productId);
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        error: 'Product not found',
+      });
+    }
+
+    // Create event
+    const event: Event = {
+      id: `EVT-API-${Date.now()}`,
+      type: type,
+      productId: productId,
+      quantity: quantity,
+      warehouse: warehouse || product.warehouse,
+      timestamp: new Date(),
+      metadata: { source: 'api', manual: true },
+    };
+
+    // Publish to Kafka
+    await sendEvent(event);
+
+    console.log(`📤 API created event: ${type} - ${productId} (${quantity} units)`);
+
+    res.json({
+      success: true,
+      data: event,
+      message: 'Event published to Kafka successfully',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('Error creating event:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create event',
     });
   }
 });

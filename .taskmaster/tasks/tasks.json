@@ -486,7 +486,7 @@
             "description": "Create Next.js API route handlers for /api/products, /api/events, /api/alerts, and /api/forecast supporting basic CRUD operations.",
             "dependencies": [],
             "details": "Set up route handler files in the app/api directory for each resource. Implement GET, POST, PUT, and DELETE methods for products, events, alerts, and forecasts. Ensure each handler interacts with in-memory or mock data for MVP. Use Next.js conventions for request/response handling and TypeScript types for safety.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Use Postman or curl to verify each endpoint supports expected CRUD operations and returns correct status codes and data."
           },
           {
@@ -497,7 +497,7 @@
               1
             ],
             "details": "Within event and product API handlers, publish relevant events to Kafka when stock changes occur. Set up Kafka consumers to trigger automated actions (e.g., restock alerts, reorder notifications) and update alert/forecast data. Ensure event streaming logic is encapsulated and can be triggered via API calls.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Simulate API calls that trigger Kafka events; verify that consumers process events and update alerts/forecasts as expected."
           },
           {
@@ -1240,7 +1240,7 @@
     ],
     "metadata": {
       "created": "2025-11-04T15:51:07.611Z",
-      "updated": "2025-11-04T16:41:53.712Z",
+      "updated": "2025-11-04T17:01:22.081Z",
       "description": "Tasks for master context"
     }
   }
