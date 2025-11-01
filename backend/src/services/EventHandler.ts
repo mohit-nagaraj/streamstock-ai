@@ -6,6 +6,7 @@
 import { Event, Alert, Product, AlertType, AlertSeverity } from '../models/types';
 import { productStore, eventStore, alertStore } from '../stores/InMemoryStore';
 import { v4 as uuidv4 } from 'uuid';
+import { getProductRecommendation } from './AIRecommendations';
 
 export class EventHandler {
   /**
@@ -137,13 +138,22 @@ export class EventHandler {
       return; // Alert already exists
     }
 
-    // Create new alert
+    // Get AI recommendation for this product
+    const aiRecommendation = getProductRecommendation(
+      product.id,
+      productStore.getAll(),
+      eventStore.getAll(),
+      alertStore.getAll()
+    );
+
+    // Create new alert with AI recommendation
     const alert: Alert = {
       id: uuidv4(),
       productId: product.id,
       severity,
       type,
       message,
+      aiRecommendation: aiRecommendation ? aiRecommendation.recommendation : undefined,
       resolved: false,
       timestamp: new Date(),
     };

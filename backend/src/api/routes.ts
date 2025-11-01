@@ -3,6 +3,7 @@ import { productStore, alertStore, eventStore } from '../stores/InMemoryStore';
 import { sendEvent } from '../kafka/producer';
 import { Event } from '../models/types';
 import { generateForecasts, calculateSMAForecast } from '../services/Forecasting';
+import { generateRecommendations, getProductRecommendation, getCacheStats } from '../services/AIRecommendations';
 
 const router = express.Router();
 
@@ -359,6 +360,59 @@ router.get('/forecast', (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       error: 'Failed to generate forecast',
+    });
+  }
+});
+
+// AI Recommendations API
+router.get('/recommendations', (req: Request, res: Response) => {
+  try {
+    const { productId } = req.query;
+
+    const products = productStore.getAll();
+    const events = eventStore.getAll();
+    const alerts = alertStore.getAll();
+
+    if (productId) {
+      // Get recommendation for specific product
+      const recommendation = getProductRecommendation(
+        productId as string,
+        products,
+        events,
+        alerts
+      );
+
+      if (!recommendation) {
+        return res.json({
+          success: true,
+          data: null,
+          message: 'No recommendations needed for this product',
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      res.json({
+        success: true,
+        data: recommendation,
+        timestamp: new Date().toISOString(),
+      });
+    } else {
+      // Get all recommendations
+      const recommendations = generateRecommendations(products, events, alerts);
+
+      res.json({
+        success: true,
+        data: recommendations,
+        count: recommendations.length,
+        cacheStats: getCacheStats(),
+        timestamp: new Date().toISOString(),
+      });
+    }
+  } catch (error) {
+    console.error('Error generating recommendations:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to generate recommendations',
     });
   }
 });
