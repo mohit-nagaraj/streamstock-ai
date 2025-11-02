@@ -892,7 +892,7 @@
           10,
           11
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -900,7 +900,7 @@
             "description": "Set up the `/analytics` route and build the page structure with sections for demand forecast, product performance, warehouse distribution, AI insights, and CSV export.",
             "dependencies": [],
             "details": "Create the React page and organize layout using a grid or flexbox. Add placeholder components for charts, insights, and export button. Ensure the page is responsive and matches MVP requirements.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify page loads correctly, all sections are visible, and layout adapts to different screen sizes."
           },
           {
@@ -911,7 +911,7 @@
               1
             ],
             "details": "Fetch analytics and forecast data from backend API. Render a line chart for demand forecast and bar/pie charts for product and warehouse metrics. Ensure charts update in real-time as new events arrive.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Simulate backend events and confirm charts update live; validate chart data matches backend payloads."
           },
           {
@@ -922,7 +922,7 @@
               2
             ],
             "details": "Integrate Gemini API or mock service to fetch AI insights. Render insights in a dedicated panel, highlighting actionable recommendations (e.g., restock alerts, top movers).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check that AI insights panel displays relevant recommendations and updates when analytics data changes."
           },
           {
@@ -933,7 +933,7 @@
               3
             ],
             "details": "Add a CSV export button. Serialize current analytics data into CSV format and trigger download. Ensure exported file includes all key metrics and is properly formatted.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Download CSV and verify contents match displayed analytics; check for correct formatting and completeness."
           },
           {
@@ -944,7 +944,7 @@
               4
             ],
             "details": "Perform manual and automated tests for layout, charts, AI insights, and CSV export. Fix any issues found. Commit with a message summarizing implemented features and push to remote repository.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run end-to-end tests; verify all features work as intended; confirm commit and push are successful."
           }
         ]
@@ -960,7 +960,7 @@
           9,
           11
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -1240,7 +1240,7 @@
     ],
     "metadata": {
       "created": "2025-11-04T15:51:07.611Z",
-      "updated": "2025-11-04T17:58:16.121Z",
+      "updated": "2025-11-04T18:01:32.630Z",
       "description": "Tasks for master context"
     }
   }
