@@ -960,7 +960,7 @@
           9,
           11
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -968,7 +968,7 @@
             "description": "Develop the core `/alerts` page UI to display a real-time alert stream, including filters for categories and status.",
             "dependencies": [],
             "details": "Use React to build the alert feed UI. Integrate polling logic (every 2-3 seconds) to fetch alerts from the backend. Implement category filters and status filters (e.g., unresolved, resolved). Display category badges for each alert. Ensure the feed updates in near real-time and handles loading/error states gracefully.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Mock backend responses to verify polling, filter functionality, and badge rendering. Simulate slow/failed API calls to test loading and error handling."
           },
           {
@@ -979,7 +979,7 @@
               1
             ],
             "details": "For each alert, display 'Resolve' and 'Reorder' buttons. On click, call the appropriate backend API to update the alert status or trigger a reorder. Optimistically update the UI for responsiveness. Handle API errors and display feedback to the user.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Unit test button actions with mock APIs. Verify UI updates correctly on success and error. Ensure only actionable alerts show buttons."
           },
           {
@@ -990,7 +990,7 @@
               1
             ],
             "details": "Add an expandable/collapsible panel for each alert row. When expanded, fetch and display the alert's history from the backend (status changes, actions taken, timestamps). Ensure smooth UX and efficient data loading.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test expanding/collapsing alerts, verify correct history data loads, and handle empty or error states."
           },
           {
@@ -1003,7 +1003,7 @@
               3
             ],
             "details": "Perform end-to-end testing: simulate alert generation, resolution, and reorder actions. Validate polling updates, filter logic, badge colors, and expandable history. Test edge cases such as rapid alert changes and backend failures.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use Cypress or React Testing Library for UI tests. Mock Kafka event streams and backend APIs to simulate real-time scenarios."
           },
           {
@@ -1014,7 +1014,7 @@
               4
             ],
             "details": "Stage all changes, write a commit message summarizing the implemented `/alerts` page, real-time polling, actions, and tests. Push the commit to the remote repository to ensure code is backed up and available for review.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null
           }
         ]
@@ -1030,7 +1030,7 @@
           7,
           8
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -1240,7 +1240,7 @@
     ],
     "metadata": {
       "created": "2025-11-04T15:51:07.611Z",
-      "updated": "2025-11-04T18:01:32.630Z",
+      "updated": "2025-11-04T18:03:32.299Z",
       "description": "Tasks for master context"
     }
   }
