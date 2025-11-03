@@ -1180,7 +1180,7 @@
           16,
           17
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1188,7 +1188,7 @@
             "description": "Write a clear project overview, setup prerequisites, and step-by-step installation instructions in the README.md file.",
             "dependencies": [],
             "details": "Include a concise description of the AI-Enhanced Event-Driven Inventory Management System, its purpose, and key features. List all prerequisites (Docker, Node.js, etc.) and provide detailed setup steps, including Docker Compose and Makefile usage. Ensure instructions are actionable for new developers.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Have a team member follow the setup instructions from scratch and confirm successful local deployment."
           },
           {
@@ -1199,7 +1199,7 @@
               1
             ],
             "details": "Use a diagram tool (e.g., Excalidraw, draw.io) to visualize producers, Kafka topics, consumers, forecasting model, and dashboard. Add the diagram to the README with a brief explanation of each component and their interactions.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Review the diagram for accuracy and clarity; verify all major system components and data flows are represented."
           },
           {
@@ -1210,7 +1210,7 @@
               2
             ],
             "details": "Describe typical user actions: starting the system, simulating sales events, viewing real-time updates, and understanding forecasting outputs. Include example commands and screenshots where relevant.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Walk through the guide step-by-step and verify that each instruction matches the current system behavior."
           },
           {
@@ -1221,7 +1221,7 @@
               3
             ],
             "details": "Capture the dashboard, real-time stock updates, AI predictions, and alert notifications. Annotate images or video as needed for clarity. Reference these assets in the README walkthrough.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify all major features are visually documented and assets are accessible from the README."
           },
           {
@@ -1232,7 +1232,7 @@
               4
             ],
             "details": "Check that the README covers overview, setup, architecture, usage, and demo. Ensure all screenshots/videos are present and correctly referenced. Commit with a message like 'Add comprehensive README and demo assets for MVP'. Push to remote repository.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Peer review the documentation and verify all deliverables are present in the repository."
           }
         ]
@@ -1240,7 +1240,7 @@
     ],
     "metadata": {
       "created": "2025-11-04T15:51:07.611Z",
-      "updated": "2025-11-04T18:05:26.000Z",
+      "updated": "2025-11-04T18:06:36.242Z",
       "description": "Tasks for master context"
     }
   }

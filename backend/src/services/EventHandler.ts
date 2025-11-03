@@ -7,6 +7,7 @@ import { Event, Alert, Product, AlertType, AlertSeverity } from '../models/types
 import { productStore, eventStore, alertStore } from '../stores/InMemoryStore';
 import { v4 as uuidv4 } from 'uuid';
 import { getProductRecommendation } from './AIRecommendations';
+import { broadcastEvent, broadcastProductUpdate, broadcastAlert, broadcastAlertResolution } from './WebSocketService';
 
 export class EventHandler {
   /**
@@ -15,6 +16,9 @@ export class EventHandler {
   async processEvent(event: Event): Promise<void> {
     // Store the event
     eventStore.create(event);
+
+    // Broadcast event to all connected clients
+    broadcastEvent(event);
 
     // Update product stock based on event type
     const product = productStore.get(event.productId);
@@ -45,6 +49,9 @@ export class EventHandler {
       console.error(`Failed to update stock for product: ${event.productId}`);
       return;
     }
+
+    // Broadcast product update
+    broadcastProductUpdate(updatedProduct);
 
     // Check for alert conditions
     await this.checkAlertConditions(updatedProduct, event);
@@ -160,6 +167,9 @@ export class EventHandler {
 
     alertStore.create(alert);
     console.log(`🚨 Alert created: ${type} for ${product.name}`);
+
+    // Broadcast alert to all connected clients
+    broadcastAlert(alert);
   }
 
   /**
@@ -187,6 +197,9 @@ export class EventHandler {
       if (shouldResolve) {
         alertStore.resolve(alert.id);
         console.log(`✅ Alert auto-resolved: ${alert.type} for ${product.name}`);
+
+        // Broadcast alert resolution
+        broadcastAlertResolution(alert.id);
       }
     });
   }
@@ -198,6 +211,9 @@ export class EventHandler {
     const resolved = alertStore.resolve(alertId);
     if (resolved) {
       console.log(`✅ Alert manually resolved: ${alertId}`);
+
+      // Broadcast alert resolution
+      broadcastAlertResolution(alertId);
     }
     return resolved;
   }

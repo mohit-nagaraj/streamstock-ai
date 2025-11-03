@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { toast } from 'sonner';
 import {
   LineChart,
   Line,
@@ -82,6 +83,8 @@ export default function AnalyticsPage() {
       const productsData = await productsRes.json();
       if (productsData.success) {
         setProducts(productsData.data);
+      } else {
+        console.error('Failed to fetch products:', productsData.error);
       }
 
       // Fetch forecasts
@@ -89,13 +92,22 @@ export default function AnalyticsPage() {
       const forecastsData = await forecastsRes.json();
       if (forecastsData.success) {
         setForecasts(forecastsData.data);
+      } else {
+        console.error('Failed to fetch forecasts:', forecastsData.error);
       }
 
       // Fetch AI recommendations
-      const recommendationsRes = await fetch('/api/recommendations');
-      const recommendationsData = await recommendationsRes.json();
-      if (recommendationsData.success) {
-        setRecommendations(recommendationsData.data);
+      try {
+        const recommendationsRes = await fetch('/api/recommendations');
+        const recommendationsData = await recommendationsRes.json();
+        if (recommendationsData.success) {
+          setRecommendations(recommendationsData.data);
+        } else {
+          console.error('Failed to fetch recommendations:', recommendationsData.error);
+        }
+      } catch (error) {
+        console.error('Error fetching recommendations:', error);
+        setRecommendations([]);
       }
 
       // Fetch events for performance analysis
@@ -188,7 +200,7 @@ export default function AnalyticsPage() {
     }
 
     const forecast = forecasts.find((f) => f.productId === selectedProduct);
-    if (!forecast) return [];
+    if (!forecast || !forecast.predictions || !Array.isArray(forecast.predictions)) return [];
 
     return forecast.predictions.map((pred) => ({
       date: new Date(pred.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
@@ -199,47 +211,72 @@ export default function AnalyticsPage() {
 
   // Export data to CSV
   const exportToCSV = () => {
-    const csvData: string[] = [];
+    try {
+      if (products.length === 0) {
+        console.warn('No products to export');
+        toast.warning('No data available to export', {
+          description: 'Please wait for data to load.',
+        });
+        return;
+      }
 
-    // Header
-    csvData.push('Product ID,Product Name,Current Stock,Reorder Point,Max Capacity,Warehouse,Category,Unit Price,Sales Velocity,Forecast (7 days),AI Priority,AI Recommendation');
+      const csvData: string[] = [];
 
-    // Data rows
-    products.forEach((product) => {
-      const forecast = forecasts.find((f) => f.productId === product.id);
-      const recommendation = recommendations.find((r) => r.productId === product.id);
-      const productEvents = events.filter((e) => e.productId === product.id && e.type === 'SALE');
-      const totalSales = productEvents.reduce((sum, e) => sum + e.quantity, 0);
-      const salesVelocity = (totalSales / 30).toFixed(2);
+      // Header
+      csvData.push('Product ID,Product Name,Current Stock,Reorder Point,Max Capacity,Warehouse,Category,Unit Price,Sales Velocity,Forecast (7 days),AI Priority,AI Recommendation');
 
-      const finalPrediction = forecast?.predictions[forecast.predictions.length - 1]?.predictedStock || 'N/A';
+      // Data rows
+      products.forEach((product) => {
+        const forecast = forecasts.find((f) => f.productId === product.id);
+        const recommendation = recommendations.find((r) => r.productId === product.id);
+        const productEvents = events.filter((e) => e.productId === product.id && e.type === 'SALE');
+        const totalSales = productEvents.reduce((sum, e) => sum + e.quantity, 0);
+        const salesVelocity = (totalSales / 30).toFixed(2);
 
-      csvData.push([
-        product.id,
-        `"${product.name}"`,
-        product.currentStock,
-        product.reorderPoint,
-        product.maxCapacity,
-        product.warehouse,
-        product.category,
-        product.unitPrice,
-        salesVelocity,
-        finalPrediction,
-        recommendation?.priority || 'N/A',
-        `"${recommendation?.recommendation || 'N/A'}"`,
-      ].join(','));
-    });
+        const finalPrediction = forecast?.predictions?.[forecast.predictions.length - 1]?.predictedStock ?? 'N/A';
 
-    // Create blob and download
-    const blob = new Blob([csvData.join('\n')], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `analytics-export-${new Date().toISOString().split('T')[0]}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+        csvData.push([
+          product.id || '',
+          `"${(product.name || '').replace(/"/g, '""')}"`, // Escape quotes properly
+          product.currentStock ?? 0,
+          product.reorderPoint ?? 0,
+          product.maxCapacity ?? 0,
+          product.warehouse || '',
+          product.category || '',
+          product.unitPrice ?? 0,
+          salesVelocity,
+          finalPrediction,
+          recommendation?.priority || 'N/A',
+          `"${(recommendation?.recommendation || 'N/A').replace(/"/g, '""')}"`, // Escape quotes properly
+        ].join(','));
+      });
+
+      // Create blob and download
+      const blob = new Blob([csvData.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `analytics-export-${new Date().toISOString().split('T')[0]}.csv`;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+
+      // Cleanup
+      setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 100);
+
+      console.log(`✅ Exported ${products.length} products to CSV`);
+      toast.success('CSV exported successfully', {
+        description: `Exported ${products.length} products`,
+      });
+    } catch (error) {
+      console.error('Error exporting to CSV:', error);
+      toast.error('Failed to export CSV', {
+        description: 'Please try again.',
+      });
+    }
   };
 
   // Get priority color
