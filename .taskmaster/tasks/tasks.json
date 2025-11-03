@@ -1030,7 +1030,7 @@
           7,
           8
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1038,7 +1038,7 @@
             "description": "Develop the core UI to display a real-time stream of Kafka events on the /events page, showing event metadata and supporting live updates.",
             "dependencies": [],
             "details": "Use a frontend framework (e.g., React) to connect to the backend event stream API. Render a list of incoming Kafka events with essential metadata (timestamp, type, ID). Ensure the UI updates in real-time as new events arrive, using polling or websockets as appropriate for MVP.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Simulate event flow with test Kafka events; verify that new events appear in the UI without manual refresh."
           },
           {
@@ -1049,7 +1049,7 @@
               1
             ],
             "details": "Implement dropdowns or multi-select controls for event type and a date/time picker for time range. Integrate these controls with the event stream query logic so only matching events are shown. Ensure filters can be changed dynamically without page reload.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with various filter combinations; confirm only relevant events are displayed and filters reset/clear as expected."
           },
           {
@@ -1060,7 +1060,7 @@
               1
             ],
             "details": "Add an expand/collapse button or icon to each event row. When expanded, render the event's JSON payload using a syntax highlighter or JSON viewer component for readability. Ensure large payloads are handled efficiently.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Expand several events with different payload sizes; verify correct formatting, no UI lag, and proper collapse behavior."
           },
           {
@@ -1071,7 +1071,7 @@
               2
             ],
             "details": "Integrate a charting library (e.g., Recharts or Chart.js) to display bar or line charts for event counts by type and time. Ensure charts update in real-time as new events arrive or filters change. Place charts above or beside the event list for visibility.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger events of various types and times; verify charts update accurately and match the filtered event list."
           },
           {
@@ -1085,7 +1085,7 @@
               4
             ],
             "details": "Perform end-to-end testing of the /events page: real-time updates, filtering, expandable JSON, and charts. Fix any critical bugs. Commit with a message like 'feat: MVP /events page with real-time stream, filters, JSON view, and stats charts'. Push to the remote repository.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Manual regression test of all features; verify git commit history and remote branch reflect the latest changes."
           }
         ]
@@ -1104,7 +1104,7 @@
           15,
           16
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1112,7 +1112,7 @@
             "description": "Create a reusable React hook to poll API endpoints every 2-3 seconds for real-time inventory, prediction, and alert data.",
             "dependencies": [],
             "details": "Develop a custom hook (e.g., usePolling) using useEffect and setInterval to fetch data at a configurable interval. Ensure cleanup on unmount to prevent memory leaks. Integrate with all dashboard pages to update stock levels, predictions, and alerts in real time.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Mock API endpoints and verify that polling occurs at the correct interval. Confirm that data updates in the UI without manual refresh.[1][2][3]"
           },
           {
@@ -1123,7 +1123,7 @@
               1
             ],
             "details": "Use shadcn/ui spinner components to show loading states while API requests are in progress. Ensure spinners are visible during initial load and subsequent polling cycles. Hide spinners when data is successfully fetched.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Simulate slow API responses and verify that loading spinners appear and disappear appropriately on all relevant pages."
           },
           {
@@ -1134,7 +1134,7 @@
               1
             ],
             "details": "Catch errors in the polling hook and display user-friendly error toasts. Ensure errors do not break the polling loop and allow for retry logic. Log errors for debugging and provide clear feedback to users.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Force API failures (e.g., network disconnect, server error) and verify that error toasts are shown and polling resumes or retries as expected.[3]"
           },
           {
@@ -1146,7 +1146,7 @@
               3
             ],
             "details": "Simulate various scenarios: normal operation, slow responses, and API failures. Confirm that stock levels, predictions, and alerts update in real time, loading spinners display correctly, and errors are handled gracefully.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use mock servers and network throttling tools to simulate different API behaviors. Validate UI state transitions and user feedback."
           },
           {
@@ -1157,7 +1157,7 @@
               4
             ],
             "details": "Write clear commit messages summarizing polling logic, loading/error state integration, and test coverage. Push changes to the remote repository and ensure all code is versioned for review.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that all changes are committed and pushed. Review commit history for clarity and completeness."
           }
         ]
@@ -1180,7 +1180,7 @@
           16,
           17
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -1240,7 +1240,7 @@
     ],
     "metadata": {
       "created": "2025-11-04T15:51:07.611Z",
-      "updated": "2025-11-04T18:03:32.299Z",
+      "updated": "2025-11-04T18:05:26.000Z",
       "description": "Tasks for master context"
     }
   }

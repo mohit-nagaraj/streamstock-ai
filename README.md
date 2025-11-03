@@ -18,7 +18,7 @@ make install
 make dev
 ```
 
-Access the dashboard at `http://localhost:3000`
+Access the dashboard at `http://localhost:3001`
 
 ## 📋 Table of Contents
 
@@ -48,9 +48,10 @@ Access the dashboard at `http://localhost:3000`
 - 🤖 **AI Recommendations**: Powered by Gemini API
 
 ### AI/ML Capabilities
-- **7-Day Stock Forecasting**: ARIMA/Prophet models
-- **Demand Prediction**: Historical trend analysis
-- **Smart Reordering**: AI-driven recommendations
+- **7-Day Stock Forecasting**: Simple Moving Average (SMA) with confidence scoring
+- **Demand Prediction**: Sales velocity analysis and trend detection
+- **Smart Reordering**: Rule-based AI recommendations with 5-minute caching
+- **Intelligent Insights**: Priority-based recommendations (critical, high, medium, low)
 
 ### Modern Dashboard
 - 📊 Real-time metrics and KPIs
@@ -127,9 +128,10 @@ Access the dashboard at `http://localhost:3000`
 - **Make** - Build automation
 
 ### AI/ML
-- **Gemini API** - AI-powered recommendations
-- **Prophet/ARIMA** - Time-series forecasting
-- **Moving Average** - Simple predictions
+- **Rule-Based AI** - Intelligent recommendation engine
+- **Simple Moving Average (SMA)** - Stock forecasting
+- **Sales Velocity Analysis** - Demand prediction
+- **Caching Layer** - 5-minute TTL for performance
 
 ## 📦 Installation
 
@@ -252,7 +254,14 @@ See [docs/API.md](./docs/API.md) for detailed API documentation.
 
 **Forecasts**
 - `GET /api/forecast` - Get stock predictions
-- `GET /api/forecast/:productId` - Get product forecast
+- `GET /api/forecast?productId=PROD-001` - Get product forecast
+
+**AI Recommendations**
+- `GET /api/recommendations` - Get all AI recommendations
+- `GET /api/recommendations?productId=PROD-001` - Get product recommendation
+
+**Metrics**
+- `GET /api/metrics` - Get dashboard metrics
 
 ## 📁 Project Structure
 
@@ -310,8 +319,8 @@ streamstock-ai/
    ```
 
 4. **Access Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:3000/api
+   - Frontend: http://localhost:3001
+   - Backend API: http://localhost:4000/api
 
 ### Event Flow Testing
 
