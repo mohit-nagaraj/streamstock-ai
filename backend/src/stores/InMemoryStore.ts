@@ -101,8 +101,11 @@ class ProductStore extends InMemoryStore<Product> {
     const product = this.get(productId);
     if (!product) return undefined;
 
+    // Prevent stock from going negative
+    const newStock = Math.max(0, product.currentStock + quantity);
+
     return this.update(productId, {
-      currentStock: product.currentStock + quantity,
+      currentStock: newStock,
       lastUpdated: new Date(),
     } as Partial<Product>);
   }

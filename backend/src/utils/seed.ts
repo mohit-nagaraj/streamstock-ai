@@ -49,7 +49,7 @@ function generateProducts(warehouses: Warehouse[]): Product[] {
     for (let i = 0; i < Math.min(numProducts, productNames.length); i++) {
       productCount++;
       const warehouse = warehouses[Math.floor(Math.random() * warehouses.length)];
-      const baseStock = Math.floor(Math.random() * 400) + 100; // 100-500 units
+      const baseStock = Math.floor(Math.random() * 80) + 50; // 50-130 units (realistic working inventory)
 
       const product: Product = {
         id: `PROD-${String(productCount).padStart(3, '0')}`,
@@ -58,8 +58,8 @@ function generateProducts(warehouses: Warehouse[]): Product[] {
         category,
         warehouse: warehouse.id,
         currentStock: baseStock,
-        reorderPoint: Math.floor(baseStock * 0.3), // 30% of initial stock
-        maxCapacity: baseStock * 2,
+        reorderPoint: Math.floor(baseStock * 0.5), // 50% of initial stock (higher threshold for alerts)
+        maxCapacity: Math.floor(baseStock * 1.8), // 80% more than base (tighter capacity)
         unitPrice: parseFloat((Math.random() * 200 + 20).toFixed(2)), // $20-$220
         predictedStock7d: baseStock, // Will be updated by forecasting
         lastUpdated: new Date()
@@ -126,9 +126,9 @@ async function generateHistoricalEvents(products: Product[]): Promise<void> {
  */
 function selectEventType(): EventType {
   const rand = Math.random();
-  if (rand < 0.65) return 'SALE';      // 65% sales
-  if (rand < 0.90) return 'RESTOCK';   // 25% restocks
-  return 'RETURN';                      // 10% returns
+  if (rand < 0.70) return 'SALE';      // 70% sales (increased)
+  if (rand < 0.85) return 'RESTOCK';   // 15% restocks (reduced from 25%)
+  return 'RETURN';                      // 15% returns (increased from 10%)
 }
 
 /**
@@ -137,9 +137,9 @@ function selectEventType(): EventType {
 function generateQuantity(eventType: EventType): number {
   switch (eventType) {
     case 'SALE':
-      return Math.floor(Math.random() * 10) + 1; // 1-10 units
+      return Math.floor(Math.random() * 8) + 3; // 3-10 units (avoid tiny sales)
     case 'RESTOCK':
-      return Math.floor(Math.random() * 200) + 100; // 100-300 units
+      return Math.floor(Math.random() * 25) + 15; // 15-40 units (3-6x sales, more realistic)
     case 'RETURN':
       return Math.floor(Math.random() * 5) + 1; // 1-5 units
     default:

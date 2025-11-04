@@ -5,6 +5,12 @@
 
 import { Event, Product } from '../models/types';
 
+export interface DailyPrediction {
+  date: string;
+  predictedStock: number;
+  confidence: number;
+}
+
 export interface ForecastResult {
   productId: string;
   productName: string;
@@ -14,6 +20,7 @@ export interface ForecastResult {
   reorderRecommended: boolean;
   confidence: number;
   forecastDate: string;
+  predictions: DailyPrediction[];
 }
 
 /**
@@ -43,6 +50,23 @@ export function calculateSMAForecast(
   // Calculate confidence based on data consistency
   const confidence = calculateConfidence(dailyChanges);
 
+  // Generate daily predictions
+  const predictions: DailyPrediction[] = [];
+  const today = new Date();
+
+  for (let day = 1; day <= daysToForecast; day++) {
+    const futureDate = new Date(today);
+    futureDate.setDate(today.getDate() + day);
+
+    const dailyPredictedStock = Math.max(0, product.currentStock + (avgDailyChange * day));
+
+    predictions.push({
+      date: futureDate.toISOString(),
+      predictedStock: Math.round(dailyPredictedStock),
+      confidence: confidence,
+    });
+  }
+
   return {
     productId: product.id,
     productName: product.name,
@@ -52,6 +76,7 @@ export function calculateSMAForecast(
     reorderRecommended,
     confidence,
     forecastDate: new Date().toISOString(),
+    predictions,
   };
 }
 
